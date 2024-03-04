@@ -1,5 +1,9 @@
 # Wprowadzenie do projektu grupy 3
 
+- Jakub Dulnikowski
+- Kamil Szpechciński
+- Julian Pryczkowski
+
 Witaj w naszym projekcie! Aby zapewnić płynne działanie i izolację od pozostałych projektów, korzystamy ze środowiska wirtualnego. Poniżej znajdziesz instrukcje, jak skonfigurować środowisko i zainstalować wszystkie potrzebne zależności.
 
 ## Instalacja środowiska wirtualnego
