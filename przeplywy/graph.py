@@ -6,7 +6,6 @@ class Graph:
         self.graph = graph
         self.ROW = len(graph)
 
-    # DFS to find if there's a path from s to t
     def dfs(self, s, t, parent):
         visited = [False] * self.ROW
         stack = [s]
@@ -23,7 +22,6 @@ class Graph:
 
         return visited[t]
 
-    # Ford-Fulkerson using DFS to find augmenting paths
     def ford_fulkerson_dfs(self, source, sink):
         parent = [-1] * self.ROW
         max_flow = 0
@@ -46,8 +44,7 @@ class Graph:
                 v = parent[v]
 
         return max_flow
-
-    # BFS for Edmonds-Karp
+    
     def bfs(self, s, t, parent):
         visited = [False] * self.ROW
         queue = deque()
@@ -65,7 +62,6 @@ class Graph:
 
         return visited[t]
 
-    # Edmonds-Karp algorithm
     def edmonds_karp(self, source, sink):
         parent = [-1] * self.ROW
         max_flow = 0
