@@ -6,6 +6,48 @@ class Graph:
         self.graph = graph
         self.ROW = len(graph)
 
+    # DFS to find if there's a path from s to t
+    def dfs(self, s, t, parent):
+        visited = [False] * self.ROW
+        stack = [s]
+
+        while stack:
+            u = stack.pop()
+
+            if not visited[u]:
+                visited[u] = True
+                for ind, val in enumerate(self.graph[u]):
+                    if not visited[ind] and val > 0:
+                        stack.append(ind)
+                        parent[ind] = u
+
+        return visited[t]
+
+    # Ford-Fulkerson using DFS to find augmenting paths
+    def ford_fulkerson_dfs(self, source, sink):
+        parent = [-1] * self.ROW
+        max_flow = 0
+
+        while self.dfs(source, sink, parent):
+            path_flow = float("Inf")
+            s = sink
+
+            while s != source:
+                path_flow = min(path_flow, self.graph[parent[s]][s])
+                s = parent[s]
+
+            max_flow += path_flow
+
+            v = sink
+            while v != source:
+                u = parent[v]
+                self.graph[u][v] -= path_flow
+                self.graph[v][u] += path_flow
+                v = parent[v]
+
+        return max_flow
+
+    # BFS for Edmonds-Karp
     def bfs(self, s, t, parent):
         visited = [False] * self.ROW
         queue = deque()
@@ -23,7 +65,8 @@ class Graph:
 
         return visited[t]
 
-    def ford_fulkerson(self, source, sink):
+    # Edmonds-Karp algorithm
+    def edmonds_karp(self, source, sink):
         parent = [-1] * self.ROW
         max_flow = 0
 
@@ -46,7 +89,8 @@ class Graph:
 
         return max_flow
 
-vertex_indices = {'s': 0, 'x': 1, 'y': 2, 'u': 3, 'w': 4, 'e': 5, 't': 6}
+
+vertex_indices = {"s": 0, "x": 1, "y": 2, "u": 3, "w": 4, "e": 5, "t": 6}
 
 
 graph = [
@@ -63,6 +107,10 @@ g = Graph(graph)
 
 source = vertex_indices["s"]
 sink = vertex_indices["t"]
-max_flow = g.ford_fulkerson(source, sink)
-print(max_flow)
 
+op = int(input("1. Ford-Fulkerson\n2. Edmonds-Karp\n"))
+
+if op == 1:
+    print("Max Flow (Ford-Fulkerson):", g.ford_fulkerson_dfs(source, sink))
+else:
+    print("Max Flow (Edmonds-Karp):", g.edmonds_karp(source, sink))
