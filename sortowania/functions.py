@@ -1,3 +1,4 @@
+from random import randint
 
 class Point:
     def __init__(self, x, y):
@@ -18,6 +19,9 @@ def det(p, q, r):
 
 
 def isPointInSegment(p, q, r): # p-q -> segment, r -> point
+    """
+    Function that checks if the point r lies on the segment p-q.
+    """
     if det(p, q, r) == 0:
         return min(p.x, q.x) <= r.x <= max(p.x, q.x) and min(p.y, q.y) <= r.y <= max(p.y, q.y)
     else:
@@ -25,6 +29,9 @@ def isPointInSegment(p, q, r): # p-q -> segment, r -> point
 
 
 def alfa(p):
+    """
+    Function that returns the angle between the x-axis and the line connecting the point p with the origin.
+    """
     d = abs(p.x) + abs(p.y)
     if p.x >= 0:
         if p.y >= 0:
@@ -39,20 +46,42 @@ def alfa(p):
 
 
 def polarSorting(points): # points -> array of points
+    """
+    Function that sorts the points in the array in the polar coordinate system.
+    """
     points.sort(key=lambda point: alfa(point))
     return points
 
 
-# # example of usage
-# punkt1 = Point(2, 3)
-# punkt2 = Point(4, 5)
-# punkt3 = Point(6, 1)
-# punkt4 = Point(3, 4)
-# punkt5 = Point(1, 3)
-# print(det(punkt1, punkt2, punkt3))
-# print(isPointInSegment(punkt1, punkt2, punkt3))
-#
-# arr = polarSorting([punkt1, punkt2, punkt3, punkt4, punkt5])
-#
-# for point in arr:
-#     print(point.x, point.y, ": ", alfa(point))
+def graham(points):
+    """
+    Function that finds the convex hull of the set of points using the Graham algorithm.
+    """
+    n = len(points)
+    points = polarSorting(points)
+    hull = []
+    hull.append(points[0])
+    hull.append(points[1])
+    for i in range(2, n):
+        while len(hull) > 1 and det(hull[-2], hull[-1], points[i]) < 0:
+            hull.pop()
+        hull.append(points[i])
+
+    return hull
+
+
+points = []
+for _ in range(10):
+    x = randint(-10, 10)
+    y = randint(-10, 10)
+    points.append(Point(x, y))
+
+hull = graham(points)
+for point in hull:
+    print(f'({point.x}, {point.y})')
+
+
+
+
+
+
