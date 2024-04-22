@@ -33,13 +33,3 @@ def graham_scan(points):
             hull.pop()
         hull.append(point)
     return hull
-
-# Sample points data
-points = [
-    Point(0, 3), Point(2, 2), Point(1, 1), Point(2, 1),
-    Point(3, 1), Point(0, 1), Point(3, 3)
-]
-
-hull = graham_scan(points)
-for point in hull:
-    print(f'({point.x}, {point.y})')

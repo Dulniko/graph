@@ -1,1 +1,0 @@
-Dla każdego wierzchołka v tworzymy dwa wierzchołki v1 i v2. Krawędzie wchodzące do v przekierowujemy do v1, natomiast krawędzie wychodzące do v2. Na końcu dodajemy krawędź skierowaną od v1 do v2 z przepustowością c.
