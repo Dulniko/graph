@@ -52,3 +52,20 @@ Aby uruchomić testy, wykonaj poniższe polecenie w głównym katalogu projektu.
 ```bash
 pytest
 ```
+
+## Formatowanie kodu
+Formatowanie kodu odbywa się za pomocą narzędzia black. Jakość kodu
+kontrolowana jest przez narzędzie ruff.
+
+1. Aby sformatować kod, wykonaj poniższe polecenie w głównym katalogu projektu.
+
+```bash
+black .
+```
+
+2. Aby sprawdzić jakość kodu, wykonaj poniższe polecenie w głównym katalogu projektu.
+
+```bash
+ruff check --fix .
+```
+
