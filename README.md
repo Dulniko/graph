@@ -38,3 +38,17 @@ Znajdując się w głównym katalogu projektu, wykonaj poniższe polecenie, aby 
 ```bash 
 pip install -r requirements.txt
 ```
+
+### Krok 4: Zainstaluj aplikacje w trybie edytowalnym
+Aby zainstalować aplikacje w trybie edytowalnym, wykonaj poniższe polecenie w głównym katalogu projektu.
+
+```bash
+pip install -e .
+```
+
+## Uruchomienie testów
+Aby uruchomić testy, wykonaj poniższe polecenie w głównym katalogu projektu.
+
+```bash
+pytest
+```
