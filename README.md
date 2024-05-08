@@ -46,6 +46,16 @@ Aby zainstalować aplikacje w trybie edytowalnym, wykonaj poniższe polecenie w 
 pip install -e .
 ```
 
+### Krok 5: Odpalanie aplikacji
+Aby uruchomić aplikację, wykonaj poniższe polecenie w głównym katalogu projektu.
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Aplikacja będzie dostępna pod adresem `http://127.0.0.1:8000`.
+
+
 ## Uruchomienie testów
 Aby uruchomić testy, wykonaj poniższe polecenie w głównym katalogu projektu.
 
