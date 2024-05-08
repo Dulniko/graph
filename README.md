@@ -30,8 +30,6 @@ source venv/bin/activate
 venv\Scripts\activate
 ```
 
-## Instalacja zależności
-
 ### Krok 3: Instalacja paczek z pliku `requirements.txt`
 Znajdując się w głównym katalogu projektu, wykonaj poniższe polecenie, aby zainstalować wszystkie wymagane paczki.
 
