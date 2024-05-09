@@ -54,6 +54,10 @@ uvicorn app.main:app --reload
 Aplikacja będzie dostępna pod adresem `http://127.0.0.1:8000`.
 
 
+## UWAGA! Tailwind CSS
+Do projektu dodano Tailwind CSS za pomocą CDN, co pozwala na szybkie prototypowanie i stylizację bez konieczności konfiguracji złożonych narzędzi. Tailwind jest ładowany bezpośrednio w przeglądarce, co eliminuje potrzebę lokalnej kompilacji stylów.
+
+
 ## Uruchomienie testów
 Aby uruchomić testy, wykonaj poniższe polecenie w głównym katalogu projektu.
 
