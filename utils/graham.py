@@ -23,19 +23,38 @@ def is_point_in_segment(p, q, r):
     return False
 
 
-def polar_angle(p):
+def lowest_point(points):
+    """Return a point which has the lowest y. If points have the same y, return point with the lowest x"""
+    least_y = points[0].y
+    lowest_p = points[0]
+    for p in points:
+        if p.y < least_y:
+            lowest_p = p
+            least_y = p.y
+
+    least_x = lowest_p.x
+    for p in points:
+        if p.y == least_y:
+            if p.x < least_x:
+                lowest_p = p
+                least_x = p.x
+
+    return lowest_p
+
+
+def polar_angle(p, start_p):
     """Return the polar angle of point p from the origin."""
-    return math.atan2(p.y, p.x)
+    return math.atan2(p.y - start_p.y, p.x - start_p.x)
 
 
-def polar_sorting(points):
+def polar_sorting(points, start_p):
     """Sort points by their polar angle from the origin."""
-    return sorted(points, key=polar_angle)
+    return sorted(points, key=lambda angle: polar_angle(angle, start_p))
 
 
-def graham_scan(points):
+def graham_scan(points, start_p):
     """Compute the convex hull of a set of 2D points."""
-    points = polar_sorting(points)
+    points = polar_sorting(points, start_p)
     hull = [points[0], points[1]]
     for point in points[2:]:
         while len(hull) > 1 and det(hull[-2], hull[-1], point) < 0:
@@ -65,14 +84,18 @@ def visualize_hull(points, hull):
 # TODO: delete below code
 if __name__ == "__main__":
     points = [
-        Point(0, 3),
-        Point(2, 2),
-        Point(1.5, 1),
         Point(2, 1),
-        Point(3, 0),
-        Point(0, 0),
+        Point(2, 2),
         Point(3, -3),
+        Point(3, 0),
+        Point(1.5, 1),
+        Point(0, 0),
+        Point(0, 3),
+        Point(0, 4),
+        Point(2, 4),
+        Point(-3, 0),
     ]
-    hull = graham_scan(points)
+
+    hull = graham_scan(points, lowest_point(points))
     print(hull)
     visualize_hull(points, hull)
