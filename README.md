@@ -48,7 +48,7 @@ pip install -e .
 Aby uruchomić aplikację, wykonaj poniższe polecenie w głównym katalogu projektu.
 
 ```bash
-uvicorn app.main:app --reload
+uvicorn main:app --reload
 ```
 
 Aplikacja będzie dostępna pod adresem `http://127.0.0.1:8000`.
