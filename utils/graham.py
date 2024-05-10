@@ -31,16 +31,16 @@ def lowest_point(points):
         if p.y < least_y:
             lowest_p = p
             least_y = p.y
-    
+
     least_x = lowest_p.x
     for p in points:
         if p.y == least_y:
             if p.x < least_x:
                 lowest_p = p
                 least_x = p.x
-    
+
     return lowest_p
-        
+
 
 def polar_angle(p, start_p):
     """Return the polar angle of point p from the origin."""
@@ -49,7 +49,7 @@ def polar_angle(p, start_p):
 
 def polar_sorting(points, start_p):
     """Sort points by their polar angle from the origin."""
-    return sorted(points, key=lambda angle:polar_angle(angle, start_p))
+    return sorted(points, key=lambda angle: polar_angle(angle, start_p))
 
 
 def graham_scan(points, start_p):
@@ -93,10 +93,9 @@ if __name__ == "__main__":
         Point(0, 3),
         Point(0, 4),
         Point(2, 4),
-        Point(-3, 0),       
+        Point(-3, 0),
     ]
 
-    # p = Point(3,-3)
     hull = graham_scan(points, lowest_point(points))
     print(hull)
     visualize_hull(points, hull)
