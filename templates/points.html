@@ -3,15 +3,30 @@
 {% block title %}Algorytm Grahama{% endblock %}
 
 {% block content %}
-    <h1 class="text-xl font-bold mb-4">Dodaj punkt (x, y)</h1>
-    <div hx-include="points_list.html" hx-get="/points-list" hx-trigger="load" class="mb-4">
-        Ładowanie listy punktów...
-    </div>
-    <form hx-post="/points" hx-target="#points-container" hx-swap="outerHTML" class="mb-4">
-        <input type="number" name="x" placeholder="x" class="border border-gray-300 p-2 rounded w-16 mr-2" required>
-        <input type="number" name="y" placeholder="y" class="border border-gray-300 p-2 rounded w-16 mr-2" required>
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Dodaj punkt
+<div class="flex justify-between items-start" style="width: 100%;">
+    <!-- Left side - form and button for adding points -->
+    <div class="w-1/3">
+        <h1 class="text-xl font-bold mb-4">Dodaj punkt (x, y)</h1>
+        <div hx-include="points_list.html" hx-get="/points-list" hx-trigger="load" class="mb-4">
+            Ładowanie listy punktów...
+        </div>
+        <form hx-post="/points" hx-target="#points-container" hx-swap="outerHTML" class="mb-4">
+            <input type="number" name="x" placeholder="x" class="border border-gray-300 p-2 rounded w-16 mr-2" required>
+            <input type="number" name="y" placeholder="y" class="border border-gray-300 p-2 rounded w-16 mr-2" required>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Dodaj punkt
+            </button>
+        </form>
+        <!-- Button for refreshing the plot -->
+        <button hx-get="/points-plot" hx-trigger="click" hx-target="#plot-container" hx-swap="innerHTML" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
+            Wygeneruj wykres*
         </button>
-    </form>  
+        <br>
+        *Wymagane jest podanie minimum 3 punktów
+    </div>
+    
+    <!-- Right side - plot of points centered -->
+    <div id="plot-container" class="w-2/3 flex justify-center items-center"></div>
+</div>
+
 {% endblock %}

@@ -1,6 +1,7 @@
 import math
 from dataclasses import dataclass
 from matplotlib import pyplot as plt
+import io
 
 
 @dataclass
@@ -52,8 +53,9 @@ def polar_sorting(points, start_p):
     return sorted(points, key=lambda angle: polar_angle(angle, start_p))
 
 
-def graham_scan(points, start_p):
+def graham_scan(points):
     """Compute the convex hull of a set of 2D points."""
+    start_p = lowest_point(points)
     points = polar_sorting(points, start_p)
     hull = [points[0], points[1]]
     for point in points[2:]:
@@ -63,7 +65,8 @@ def graham_scan(points, start_p):
     return hull
 
 
-def visualize_hull(points, hull):
+def visualize_hull(points, buf):
+    hull = graham_scan(points)
     plt.figure()
     x = [p.x for p in points]
     y = [p.y for p in points]
@@ -78,24 +81,5 @@ def visualize_hull(points, hull):
     plt.title("Convex Hull Visualization")
     plt.legend()
     plt.grid(True)
-    plt.savefig("convex_hull.png")
-
-
-# TODO: delete below code
-if __name__ == "__main__":
-    points = [
-        Point(2, 1),
-        Point(2, 2),
-        Point(3, -3),
-        Point(3, 0),
-        Point(1.5, 1),
-        Point(0, 0),
-        Point(0, 3),
-        Point(0, 4),
-        Point(2, 4),
-        Point(-3, 0),
-    ]
-
-    hull = graham_scan(points, lowest_point(points))
-    print(hull)
-    visualize_hull(points, hull)
+    plt.savefig(buf, format="png")
+    plt.close()

@@ -1,8 +1,11 @@
 from fastapi import APIRouter, Request, Form
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, Response
 from typing import List, Dict
 from uuid import uuid4
+from fastapi import HTTPException
+import io
+from utils.graham import Point, visualize_hull, graham_scan
 
 
 router = APIRouter()
@@ -47,3 +50,28 @@ async def clear_points(request: Request):
     return templates.TemplateResponse(
         "points_list.html", {"request": request, "points": points}
     )
+
+
+import base64
+
+
+@router.get("/points-plot")
+async def plot_points():
+    if len(points) < 3:
+        raise HTTPException(
+            status_code=404, detail="Not enough points to plot a convex hull"
+        )
+
+    buf = io.BytesIO()
+    points_list = [Point(point["x"], point["y"]) for point in points]
+    hull_points = graham_scan(points_list)
+    visualize_hull(points_list, buf)
+    buf.seek(0)
+
+    img_base64 = base64.b64encode(buf.getvalue()).decode("ascii")
+    html_content = f"<img src='data:image/png;base64,{img_base64}' alt='Plot of Points' style='max-width: 100%;'>"
+    html_content += "<ul>"
+    for point in hull_points:
+        html_content += f"<li>({point.x}, {point.y})</li>"
+    html_content += "</ul>"
+    return HTMLResponse(content=html_content)
