@@ -1,7 +1,6 @@
 import math
 from dataclasses import dataclass
 from matplotlib import pyplot as plt
-import io
 
 
 @dataclass
@@ -66,6 +65,7 @@ def graham_scan(points):
 
 
 def visualize_hull(points, buf):
+    """Visualize the convex hull of a set of 2D points."""
     hull = graham_scan(points)
     plt.figure()
     x = [p.x for p in points]

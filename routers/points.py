@@ -1,11 +1,12 @@
-from fastapi import APIRouter, Request, Form
+from fastapi import APIRouter, Request, Form, HTTPException
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse, Response
+from fastapi.responses import HTMLResponse
 from typing import List, Dict
 from uuid import uuid4
-from fastapi import HTTPException
-import io
 from utils.graham import Point, visualize_hull, graham_scan
+
+import base64
+import io
 
 
 router = APIRouter()
@@ -50,9 +51,6 @@ async def clear_points(request: Request):
     return templates.TemplateResponse(
         "points_list.html", {"request": request, "points": points}
     )
-
-
-import base64
 
 
 @router.get("/points-plot")
