@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1 class="text-xl font-bold mb-4">Dodaj punkt (x, y)</h1>
-    <div hx-include="points_list.html" hx-get="/points" hx-trigger="load" class="mb-4">
+    <div hx-include="points_list.html" hx-get="/points-list" hx-trigger="load" class="mb-4">
         Ładowanie listy punktów...
     </div>
     <form hx-post="/points" hx-target="#points-container" hx-swap="outerHTML" class="mb-4">
@@ -13,5 +13,5 @@
         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Dodaj punkt
         </button>
-    </form>
+    </form>  
 {% endblock %}
