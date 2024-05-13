@@ -13,11 +13,8 @@ class Node:
         return self.freq < other.freq
 
 
-def calculate_frequencies(text):
-    return Counter(text)
-
-
-def build_huffman_tree(frequencies):
+def build_huffman_tree(text):
+    frequencies = Counter(text)
     priority_queue = [Node(char, freq) for char, freq in frequencies.items()]
     heapq.heapify(priority_queue)
 
@@ -62,14 +59,13 @@ def decode_text(encoded_text, root):
     return "".join(decoded_output)
 
 
-# example of usage
-text = "Ala ma kota a kot ma ale"
-frequencies = calculate_frequencies(text)
-root = build_huffman_tree(frequencies)
-codes = assign_codes_to_characters(root)
-encoded_text = encode_text(text, codes)
-decoded_text = decode_text(encoded_text, root)
+if __name__ == "__main__":
+    text = "Ala ma kota a kot ma ale"
+    root = build_huffman_tree(text)
+    codes = assign_codes_to_characters(root)
+    encoded_text = encode_text(text, codes)
+    decoded_text = decode_text(encoded_text, root)
 
-print("Kody Huffmana:", codes)
-print("Tekst zakodowany:", encoded_text)
-print("Tekst odkodowany:", decoded_text)
+    print("Kody Huffmana:", codes)
+    print("Tekst zakodowany:", encoded_text)
+    print("Tekst odkodowany:", decoded_text)
