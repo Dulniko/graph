@@ -14,7 +14,7 @@ class KMP:
         """
         prefix = [0] * len(pattern)
         j = 0
-        
+
         for i in range(1, len(pattern)):
             while j > 0 and pattern[j] != pattern[i]:
                 j = prefix[j - 1]
