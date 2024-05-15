@@ -4,28 +4,39 @@
 
 {% block content %}
 <div class="max-w-4xl mx-auto px-4 py-8">
-    <h1 class="text-2xl font-bold text-center mb-6">Obliczanie maksymalnego przepływu</h1>
-    <form hx-post="/flows" hx-target="#result" hx-swap="innerHTML" class="mb-6">
-        <label for="graph" class="block text-sm font-medium text-gray-700">Graf (lista list):</label>
-        <textarea name="graph" id="graph" rows="4" class="w-full p-2 border border-gray-300 rounded-md" required placeholder="Wprowadź graf w formie listy list"></textarea>
-        
-        <label for="source" class="block text-sm font-medium text-gray-700 mt-4">Źródło:</label>
-        <input type="number" name="source" id="source" class="w-full p-2 border border-gray-300 rounded-md" required>
-        
-        <label for="sink" class="block text-sm font-medium text-gray-700 mt-4">Ujście:</label>
-        <input type="number" name="sink" id="sink" class="w-full p-2 border border-gray-300 rounded-md" required>
+    <div class="w-1/3">
+        <h1 class="text-2xl font-bold text-center mb-6">Obliczanie maksymalnego przepływu</h1>
+        <form hx-post="/flows" hx-target="#result" hx-swap="innerHTML" class="mb-6">
+            <label for="graph" class="block text-sm font-medium text-gray-700">Graf (lista list):</label>
+            <textarea name="graph" id="graph" rows="4" class="w-full p-2 border border-gray-300 rounded-md" required placeholder="Wprowadź graf w formie listy list"></textarea>
+            
+            <label for="source" class="block text-sm font-medium text-gray-700 mt-4">Źródło:</label>
+            <input type="number" name="source" id="source" class="w-full p-2 border border-gray-300 rounded-md" required>
+            
+            <label for="sink" class="block text-sm font-medium text-gray-700 mt-4">Ujście:</label>
+            <input type="number" name="sink" id="sink" class="w-full p-2 border border-gray-300 rounded-md" required>
+    
+            <label for="algorithm" class="block text-sm font-medium text-gray-700 mt-4">Algorytm:</label>
+            <select name="algorithm" id="algorithm" class="w-full p-2 border border-gray-300 rounded-md" required>
+                <option value="edmonds_karp">Edmonds-Karp</option>
+                <option value="ford_fulkerson">Ford-Fulkerson</option>
+            </select>
+            
+            <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Oblicz</button>
+        </form>
 
-        <label for="algorithm" class="block text-sm font-medium text-gray-700 mt-4">Algorytm:</label>
-        <select name="algorithm" id="algorithm" class="w-full p-2 border border-gray-300 rounded-md" required>
-            <option value="edmonds_karp">Edmonds-Karp</option>
-            <option value="ford_fulkerson">Ford-Fulkerson</option>
-        </select>
-        
-        <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Oblicz</button>
-    </form>
-
-    <div id="result">
-        <!-- Answer will be displayed here -->
+        <!-- TO FIX -->
+        <button hx-get="/graph-plot" hx-params="*#graph" hx-trigger="click" hx-target="#graph-container" hx-swap="innerHTML" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
+            Wygeneruj graf
+        </button>
+    
+        <div id="result">
+            <!-- Answer will be displayed here -->
+        </div>
     </div>
+    <div id="graph-container" class="w-2/3 flex justify-center items-center">
+        <!-- Graph image will be displayed here -->
+    </div>
+    
 </div>
 {% endblock %}

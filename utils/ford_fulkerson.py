@@ -1,3 +1,6 @@
+from matplotlib import pyplot as plt
+import networkx as nx
+
 class FordFulkerson:
     def __init__(self, graph):
         """
@@ -56,3 +59,40 @@ class FordFulkerson:
                 v = parent[v]
 
         return max_flow
+    
+    def graph_visualize(self, buf):
+        """
+        Visualize the convex hull of a set of 2D points.
+
+        As parameter it takes a String, that will be a name of output file. If no parameter, it sets files name as 'visualization.png'
+        """
+        G = nx.DiGraph()
+        for ind in range(len(self.graph)):
+            G.add_node(ind + 1)
+
+        for node in range(len(self.graph)):
+            for directed_node in range(len(self.graph)):
+                if self.graph[node][directed_node] != 0:
+                    G.add_edge(
+                        node + 1,
+                        directed_node + 1,
+                        weight=self.graph[node][directed_node],
+                    )
+
+        pos = nx.spectral_layout(G)
+
+        nx.draw_networkx_nodes(G, pos)
+
+        edges = nx.draw_networkx_edges(
+            G, pos, arrowstyle="->", arrowsize=10, edge_color="black"
+        )
+
+        nx.draw_networkx_labels(
+            G, pos, font_size=12, font_color="white", font_weight="bold"
+        )
+
+        edge_labels = nx.get_edge_attributes(G, "weight")
+        nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
+
+        plt.title("Weighted Digraph")
+        plt.savefig(buf, format="png")
