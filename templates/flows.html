@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Maksymalny przepływ{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold text-center mb-6">Obliczanie maksymalnego przepływu</h1>
+    <form action="/flows" method="post">
+        <label for="graph" class="block text-sm font-medium text-gray-700">Graf (lista list):</label>
+        <textarea name="graph" id="graph" rows="4" class="w-full p-2 border border-gray-300 rounded-md" required placeholder="Wprowadź graf w formie listy list"></textarea>
+        
+        <label for="source" class="block text-sm font-medium text-gray-700 mt-4">Źródło:</label>
+        <input type="number" name="source" id="source" class="w-full p-2 border border-gray-300 rounded-md" required>
+        
+        <label for="sink" class="block text-sm font-medium text-gray-700 mt-4">Ujście:</label>
+        <input type="number" name="sink" id="sink" class="w-full p-2 border border-gray-300 rounded-md" required>
+
+        <label for="algorithm" class="block text-sm font-medium text-gray-700 mt-4">Algorytm:</label>
+        <select name="algorithm" id="algorithm" class="w-full p-2 border border-gray-300 rounded-md" required>
+            <option value="edmonds_karp">Edmonds-Karp</option>
+            <option value="ford_fulkerson">Ford-Fulkerson</option>
+        </select>
+        
+        <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Oblicz</button>
+    </form>
+
+    {% if flow is not none %}
+        <div class="mt-8">
+            <h2 class="text-xl font-semibold">Wynik maksymalnego przepływu:</h2>
+            <p class="bg-gray-100 p-3 rounded">{{ flow }}</p>
+            <p class="text-sm text-gray-500 mt-2">Algorytm: {{ algorithm }}</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
