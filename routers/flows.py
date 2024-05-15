@@ -31,18 +31,22 @@ async def calculate_flow(
             status_code=400, detail="Graph, source, and sink cannot be empty!"
         )
 
-    graph = eval(graph)  # Convert string representation of list to list
-    if algorithm == Algorithm.edmonds_karp:
+    try:
+        graph = eval(graph)  # Convert string representation of list to list
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid graph format!")
+
+    if algorithm == "edmonds_karp":
         ek = EdmondsKarp(graph)
         flow = ek.edmonds_karp(source, sink)
-    elif algorithm == Algorithm.ford_fulkerson:
+    elif algorithm == "ford_fulkerson":
         ff = FordFulkerson(graph)
         flow = ff.ford_fulkerson(source, sink)
     else:
         raise HTTPException(status_code=400, detail="Invalid algorithm selected!")
 
     return templates.TemplateResponse(
-        "flows.html", {"request": request, "flow": flow, "algorithm": algorithm}
+        "flow_result.html", {"request": request, "flow": flow, "algorithm": algorithm}
     )
 
 

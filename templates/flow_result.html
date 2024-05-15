@@ -1,0 +1,7 @@
+{% if flow is not none %}
+    <div>
+        <h2 class="text-xl font-semibold">Wynik maksymalnego przepływu:</h2>
+        <p class="bg-gray-100 p-3 rounded">Przepływ: {{ flow }}</p>
+        <p class="text-sm text-gray-500 mt-2">Algorytm: {{ algorithm }}</p>
+    </div>
+{% endif %}
