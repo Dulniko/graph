@@ -1,12 +1,7 @@
 from fastapi import APIRouter, Request, Form, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
-from utils.huffman import (
-    build_huffman_tree,
-    assign_codes_to_characters,
-    encode_text,
-    decode_text,
-)
+from utils.huffman import HuffmanCoding
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
@@ -22,11 +17,9 @@ async def encode_huffman(request: Request, text: str = Form(...)):
     if not text:
         raise HTTPException(status_code=400, detail="Tekst nie może być pusty!")
 
-    root = build_huffman_tree(text)
-    codes = assign_codes_to_characters(root)
-
-    encoded_text = encode_text(text, codes)
-    decoded_text = decode_text(encoded_text, root)
+    tree = HuffmanCoding(text)
+    encoded_text = tree.encode_text()
+    decoded_text = tree.decode_text(encoded_text)
 
     return templates.TemplateResponse(
         "huffman.html",
@@ -34,6 +27,6 @@ async def encode_huffman(request: Request, text: str = Form(...)):
             "request": request,
             "encoded_text": encoded_text,
             "decoded_text": decoded_text,
-            "codes": codes,
+            "codes": tree.codes,
         },
     )
