@@ -44,7 +44,7 @@ class HuffmanCoding:
     def assign_codes_to_characters(self, node, prefix="", code=None):
         """
         Assigns binary codes to characters based on the Huffman tree.
-        
+
         Returns the root node of the constructed Huffman tree
         """
         if code is None:
