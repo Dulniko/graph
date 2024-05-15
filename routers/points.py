@@ -3,7 +3,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from typing import List, Dict
 from uuid import uuid4
-from utils.graham import Point, visualize_hull, graham_scan
+from utils.graham import Graham, Point
 
 import base64
 import io
@@ -61,9 +61,9 @@ async def plot_points():
         )
 
     buf = io.BytesIO()
-    points_list = [Point(point["x"], point["y"]) for point in points]
-    hull_points = graham_scan(points_list)
-    visualize_hull(points_list, buf)
+    graham = Graham([Point(point["x"], point["y"]) for point in points])
+    hull_points = graham.scan()
+    graham.visualize_hull(buf)
     buf.seek(0)
 
     img_base64 = base64.b64encode(buf.getvalue()).decode("ascii")

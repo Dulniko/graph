@@ -8,9 +8,11 @@ class Point:
     x: int
     y: int
 
+
 class Graham:
     def __init__(self, points):
-        """Initializes the Graham instance with a list of points.
+        """
+        Initializes the Graham instance with a list of points.
 
         Args:
             points (list of Point): The list of points to be processed.
@@ -47,7 +49,7 @@ class Graham:
         """Sort points by their polar angle from the origin."""
         return sorted(points, key=lambda angle: self.polar_angle(angle, start_p))
 
-    def graham_scan(self):
+    def scan(self):
         """Compute the convex hull of a set of 2D points."""
         start_p = self.lowest_point()
         sorted_points = self.polar_sorting(self.points, start_p)
@@ -59,11 +61,12 @@ class Graham:
         return hull
 
     def visualize_hull(self, buf="visualization.png"):
-        """Visualize the convex hull of a set of 2D points.
-        
+        """
+        Visualize the convex hull of a set of 2D points.
+
         As parameter it takes a String, that will be a name of output file. If no parameter, it sets files name as 'visualization.png'
         """
-        hull = self.graham_scan()
+        hull = self.scan()
         plt.figure()
         x = [p.x for p in self.points]
         y = [p.y for p in self.points]
