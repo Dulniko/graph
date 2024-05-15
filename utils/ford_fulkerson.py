@@ -1,9 +1,7 @@
-from collections import deque
-
-
 class FordFulkerson:
     def __init__(self, graph):
-        """Initializes the FordFulkerson instance with a graph.
+        """
+        Initializes the FordFulkerson instance with a graph.
 
         As parameter it takes graph (list of list of int).
         """
@@ -11,7 +9,8 @@ class FordFulkerson:
         self.ROW = len(graph)
 
     def dfs(self, s, t, parent):
-        """Performs a Depth-First Search (DFS) to find an augmenting path.
+        """
+        Performs a Depth-First Search (DFS) to find an augmenting path.
 
         Returns True if there is an augmenting path from source to sink, False otherwise.
         """
@@ -31,7 +30,8 @@ class FordFulkerson:
         return visited[t]
 
     def ford_fulkerson(self, source, sink):
-        """Computes the maximum flow from source to sink using the Ford-Fulkerson algorithm.
+        """
+        Computes the maximum flow from source to sink using the Ford-Fulkerson algorithm.
 
         Returns the maximum flow from source to sink.
         """

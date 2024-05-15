@@ -3,7 +3,8 @@ from collections import deque
 
 class EdmondsKarp:
     def __init__(self, graph):
-        """Initializes the EdmondsKarp instance with a graph.
+        """
+        Initializes the EdmondsKarp instance with a graph.
 
         As parameter it takes graph (list of list of int).
         """
@@ -11,7 +12,8 @@ class EdmondsKarp:
         self.ROW = len(graph)
 
     def bfs(self, s, t, parent):
-        """Performs a Breadth-First Search (BFS) to find an augmenting path.
+        """
+        Performs a Breadth-First Search (BFS) to find an augmenting path.
 
         Returns True if there is an augmenting path from source to sink, False otherwise.
         """
@@ -32,7 +34,8 @@ class EdmondsKarp:
         return visited[t]
 
     def edmonds_karp(self, source, sink):
-        """Computes the maximum flow from source to sink using the Edmonds-Karp algorithm.
+        """
+        Computes the maximum flow from source to sink using the Edmonds-Karp algorithm.
 
         Returns the maximum flow from source to sink.
         """
