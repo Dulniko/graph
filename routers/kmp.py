@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request, Form, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from utils.kmp import KMP  # Import the KMP class
+from utils.kmp import KMP
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
