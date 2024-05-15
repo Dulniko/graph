@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Wyszukiwanie wzorca KMP{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold text-center mb-6">Wyszukiwanie wzorca KMP</h1>
+    <form hx-post="/kmp_search" hx-target="#result" hx-swap="innerHTML" class="mb-6">
+        <label for="text" class="block text-sm font-medium text-gray-700">Tekst:</label>
+        <textarea name="text" id="text" rows="4" class="w-full p-2 border border-gray-300 rounded-md" required placeholder="Wprowadź tekst tutaj..."></textarea>
+        
+        <label for="pattern" class="block text-sm font-medium text-gray-700 mt-4">Wzorzec:</label>
+        <input type="text" name="pattern" id="pattern" class="w-full p-2 border border-gray-300 rounded-md" required placeholder="Wprowadź wzorzec do wyszukania">
+
+        <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Szukaj</button>
+    </form>
+
+    <div id="result">
+        <!-- Answer will be displayed here -->
+    </div>
+</div>
+{% endblock %}

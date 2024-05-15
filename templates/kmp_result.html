@@ -1,0 +1,10 @@
+{% if result is not none %}
+    <div>
+        <h2 class="text-xl font-semibold">Wynik wyszukiwania:</h2>
+        {% if result %}
+            <p class="bg-green-100 p-3 rounded">Znaleziono wzorzec na indeksach: {{ result }}</p>
+        {% else %}
+            <p class="bg-red-100 p-3 rounded">Nie znaleziono wzorca</p>
+        {% endif %}
+    </div>
+{% endif %}

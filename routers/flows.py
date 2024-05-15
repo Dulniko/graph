@@ -45,4 +45,5 @@ async def calculate_flow(
         "flows.html", {"request": request, "flow": flow, "algorithm": algorithm}
     )
 
+
 # TODO: Visualize the flow in the graph, asynchronusly graph additon
