@@ -1,6 +1,7 @@
 from matplotlib import pyplot as plt
 import networkx as nx
 
+
 class FordFulkerson:
     def __init__(self, graph):
         """
@@ -59,7 +60,7 @@ class FordFulkerson:
                 v = parent[v]
 
         return max_flow
-    
+
     def graph_visualize(self, buf):
         """
         Visualize the convex hull of a set of 2D points.
@@ -79,7 +80,7 @@ class FordFulkerson:
                         weight=self.graph[node][directed_node],
                     )
 
-        pos = nx.spectral_layout(G)
+        pos = nx.shell_layout(G)
 
         nx.draw_networkx_nodes(G, pos)
 
