@@ -82,7 +82,8 @@ class EdmondsKarp:
                         weight=self.graph[node][directed_node],
                     )
 
-        pos = nx.spectral_layout(G)
+        # pos = nx.spectral_layout(G)
+        pos = nx.shell_layout(G)
 
         nx.draw_networkx_nodes(G, pos)
 
@@ -98,4 +99,8 @@ class EdmondsKarp:
         nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
 
         plt.title("Weighted Digraph")
-        plt.savefig(buf, format="png")
+        plt.savefig(
+            buf, 
+            format="png"
+        )
+        plt.close()

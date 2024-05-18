@@ -4,10 +4,6 @@ from fastapi.templating import Jinja2Templates
 from utils.edmonds_karp import EdmondsKarp
 from utils.ford_fulkerson import FordFulkerson
 
-import base64
-import io
-
-
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
@@ -55,22 +51,3 @@ async def calculate_flow(
 
 
 # TODO: Visualize the flow in the graph, asynchronusly graph additon
-
-@router.get("/graph-plot", response_class=HTMLResponse)
-async def plot_graph(
-    graph: str = Form(...)
-):
-    try:
-        graph = eval(graph) 
-    except Exception:
-        raise HTTPException(status_code=400, detail="Invalid graph format!")
-
-    buf = io.BytesIO()
-    ek = EdmondsKarp(graph)
-    ek.graph_visualize(buf)
-    buf.seek(0)
-
-    img_base64 = base64.b64encode(buf.getvalue()).decode("ascii")
-    html_content = f"<img src='data:image/png;base64,{img_base64}' alt='Graph Image' style='max-width: 100%;'>"
-    
-    return HTMLResponse(content=html_content)
