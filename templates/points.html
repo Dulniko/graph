@@ -28,5 +28,11 @@
     <!-- Right side - plot of points centered -->
     <div id="plot-container" class="w-2/3 flex justify-center items-center"></div>
 </div>
-
+{% if request.query_params.get('source') == 'fabulary' %}
+<div class="fixed bottom-5 right-5 m-4">
+    <a href="/flows?source=fabulary" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Następny krok
+    </a>
+</div>
+{% endif %}
 {% endblock %}
