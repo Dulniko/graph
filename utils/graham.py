@@ -4,12 +4,12 @@ from matplotlib import pyplot as plt
 from uuid import uuid4
 
 
-@dataclass
 class Point:
-    uuid: uuid4
-    x: int
-    y: int
-    brightness: int
+    def __init__(self, x, y, brightness=0, uuid=str(uuid4())):
+        self.x = x
+        self.y = y
+        self.brightness = brightness
+        self.uuid = uuid
 
 
 class Graham:
