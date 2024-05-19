@@ -64,7 +64,6 @@ class EdmondsKarp:
                 self.flow[u][v] += path_flow
                 self.flow[v][u] -= path_flow
                 v = parent[v]
-        
 
         flow_graph = [[0] * self.ROW for _ in range(self.ROW)]
         for u in range(self.ROW):
@@ -79,7 +78,7 @@ class EdmondsKarp:
         """
         Visualize the convex hull of a set of 2D points.
 
-        As parameter it takes the graph as a list of lists and a String, that will be a name of output file. 
+        As parameter it takes the graph as a list of lists and a String, that will be a name of output file.
 
         If no parameter, it sets files name as 'visualization.png'
         """

@@ -1,5 +1,4 @@
 import math
-from dataclasses import dataclass
 from matplotlib import pyplot as plt
 from uuid import uuid4
 

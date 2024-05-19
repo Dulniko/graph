@@ -1,11 +1,11 @@
 from matplotlib import pyplot as plt
-from collections import deque
 import networkx as nx
 from utils.edmonds_karp import EdmondsKarp
 from utils.graham import Graham, Point
 import numpy as np
-from scipy.spatial import ConvexHull, distance
+from scipy.spatial import ConvexHull
 from uuid import uuid4
+
 
 class GraphToHull:
     def __init__(self, graph, source, sink, points):
@@ -52,7 +52,7 @@ class GraphToHull:
                 min_y + (pos[key][1] - pos_min_y) * scale,
             )
         return pos
-    
+
     def is_point_inside_hull(self, point, hull_points):
         hull = ConvexHull(hull_points)
         new_points = np.vstack((hull_points, point))
@@ -99,13 +99,15 @@ class GraphToHull:
 
         min_x, max_x, min_y, max_y = self.get_bounding_box(hull_points, 0.01)
 
-        pos = nx.shell_layout(G)
+        pos = nx.shell_layout(G)  # moze spring_layout
         pos = self.normalize_positions(pos, min_x, max_x, min_y, max_y)
-        pos = self.adjust_positions_within_hull(pos, np.array([[p.x, p.y] for p in hull]))
+        pos = self.adjust_positions_within_hull(
+            pos, np.array([[p.x, p.y] for p in hull])
+        )
 
-        nx.draw_networkx_nodes(G, pos, node_color='blue')
-        nx.draw_networkx_nodes(G, pos, nodelist=[self.sink+1], node_color='green')
-        nx.draw_networkx_nodes(G, pos, nodelist=[self.source+1], node_color='#46c741')
+        nx.draw_networkx_nodes(G, pos, node_color="blue")
+        nx.draw_networkx_nodes(G, pos, nodelist=[self.sink + 1], node_color="green")
+        nx.draw_networkx_nodes(G, pos, nodelist=[self.source + 1], node_color="#46c741")
 
         edges = nx.draw_networkx_edges(
             G, pos, arrowstyle="->", arrowsize=10, edge_color="black"
@@ -121,6 +123,7 @@ class GraphToHull:
         plt.close()
 
 
+# TODO: Remove this block of code
 if __name__ == "__main__":
     graph = [
         [0, 16, 13, 0, 0, 0],
@@ -128,18 +131,18 @@ if __name__ == "__main__":
         [0, 4, 0, 0, 14, 0],
         [0, 0, 9, 0, 0, 20],
         [0, 0, 0, 7, 0, 4],
-        [0, 0, 0, 0, 0, 0]
+        [0, 0, 0, 0, 0, 0],
     ]
 
     points = [
-        Point(str(uuid4()), 1, 1, 0),
-        Point(str(uuid4()), 0, 3, 0),
-        Point(str(uuid4()), 2, 2, 0),
-        Point(str(uuid4()), 4, 4, 0),
-        Point(str(uuid4()), 0, 0, 0),
-        Point(str(uuid4()), 1, 2, 0),
-        Point(str(uuid4()), 3, 1, 0),
-        Point(str(uuid4()), 3, 3, 0)
+        Point(uuid=str(uuid4()), x=1, y=1, brightness=0),
+        Point(uuid=str(uuid4()), x=0, y=3, brightness=0),
+        Point(uuid=str(uuid4()), x=2, y=2, brightness=0),
+        Point(uuid=str(uuid4()), x=4, y=4, brightness=0),
+        Point(uuid=str(uuid4()), x=0, y=0, brightness=0),
+        Point(uuid=str(uuid4()), x=1, y=2, brightness=0),
+        Point(uuid=str(uuid4()), x=3, y=1, brightness=0),
+        Point(uuid=str(uuid4()), x=3, y=3, brightness=0),
     ]
 
     source = 0

@@ -3,6 +3,11 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from utils.edmonds_karp import EdmondsKarp
 from utils.ford_fulkerson import FordFulkerson
+from utils.graph_to_hull import GraphToHull
+from routers.points import points
+
+import io
+import base64
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
@@ -45,9 +50,17 @@ async def calculate_flow(
     else:
         raise HTTPException(status_code=400, detail="Invalid algorithm selected!")
 
+    buf = io.BytesIO()
+    gh = GraphToHull(graph, source, sink, points)
+    gh.visualization(buf)
+    img_base64 = base64.b64encode(buf.getvalue()).decode("ascii")
+
     return templates.TemplateResponse(
-        "flow_result.html", {"request": request, "flow": flow, "algorithm": algorithm}
+        "flow_result.html",
+        {
+            "request": request,
+            "flow": flow,
+            "algorithm": algorithm,
+            "img_base64": img_base64,
+        },
     )
-
-
-# TODO: Visualize the flow in the graph, asynchronusly graph additon

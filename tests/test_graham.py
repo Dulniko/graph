@@ -17,9 +17,9 @@ from utils.graham import Graham, Point
                 Point(3, 3, uuid=8),
             ],
             [
-                Point(0, 0, uuid=5), 
-                Point(3, 1, uuid=7), 
-                Point(4, 4, uuid=4), 
+                Point(0, 0, uuid=5),
+                Point(3, 1, uuid=7),
+                Point(4, 4, uuid=4),
                 Point(0, 3, uuid=1),
             ],
         ),
@@ -29,7 +29,7 @@ from utils.graham import Graham, Point
 def test_graham_scan(points, expected):
     graham = Graham(points)
     hull = graham.scan()
-    
+
     for p, e in zip(hull, expected):
         assert p.x == e.x
         assert p.y == e.y

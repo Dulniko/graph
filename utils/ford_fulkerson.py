@@ -75,8 +75,8 @@ class FordFulkerson:
         """
         Visualize the convex hull of a set of 2D points.
 
-        As parameter it takes the graph as a list of lists and a String, that will be a name of output file. 
-        
+        As parameter it takes the graph as a list of lists and a String, that will be a name of output file.
+
         If no parameter, it sets files name as 'visualization.png'
         """
         G = nx.DiGraph()
