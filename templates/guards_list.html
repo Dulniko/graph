@@ -1,8 +1,12 @@
-<div id="points-container">
-    {% for point in points %}
+<div id="guards-container">
+    {% for guard in guards %}
     <div class="inline-flex justify-start items-center p-2 mb-2 bg-gray-100 rounded-lg shadow-xl">
-        <span class="text-gray-700 font-medium mr-4">Punkt: ({{ point.x }}, {{ point.y }}) <br> Jasność: {{ point.brightness }}</span>
-        <button hx-delete="/points/{{ point.uuid }}" hx-target="#points-container" hx-swap="outerHTML">
+        <span class="text-gray-700 font-medium mr-4">
+            Strażnik: {{ guard.uuid }}
+            <br>
+            Energia: {{ guard.energy }}
+        </span>
+        <button hx-delete="/guards/{{ guard.uuid }}" hx-target="#guards-container" hx-swap="outerHTML">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M6 18L18 6M6 6l12 12" />
@@ -11,8 +15,8 @@
     </div>
     <br>
     {% endfor %}
-    {% if points %}
-        <button hx-delete="/points" hx-target="#points-container" hx-swap="outerHTML"
+    {% if guards %}
+        <button hx-delete="/guards" hx-target="#guards-container" hx-swap="outerHTML"
                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4">
             Usuń wszystkie punkty
         </button>

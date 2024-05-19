@@ -1,0 +1,24 @@
+<div id="range-query-result">
+    {% if guard.uuid == -1 %}
+    <div class="inline-flex justify-start items-center p-2 mb-2 bg-gray-100 rounded-lg shadow-xl">
+        <span class="text-gray-700 font-medium mr-4">
+            Brak strażnika
+        </span>    
+    </div>
+    {% else %}
+    <div class="inline-flex justify-start items-center p-2 mb-2 bg-gray-100 rounded-lg shadow-xl">
+        <span class="text-gray-700 font-medium mr-4">
+            Strażnik: {{ guard.uuid }}
+            <br>
+            Energia: {{ guard.energy }}
+        </span>
+        <form hx-post="/scout" hx-target="#scout-result" hx-swap="innerHTML" class="mb-4">
+            <input type="hidden" name="guard_uuid" value="{{ guard.uuid }}">
+            <input type="number" name="max_steps" placeholder="max steps" class="border border-gray-300 p-2 rounded w-24 mr-2" required>
+            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                Wyślij na zwiad
+            </button>
+        </form>
+    </div>
+    {% endif %}
+</div>

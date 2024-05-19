@@ -1,12 +1,15 @@
 import math
 from dataclasses import dataclass
 from matplotlib import pyplot as plt
+from uuid import uuid4
 
 
 @dataclass
 class Point:
+    uuid: uuid4
     x: int
     y: int
+    brightness: int
 
 
 class Graham:
@@ -60,17 +63,21 @@ class Graham:
             hull.append(point)
         return hull
 
-    def visualize_hull(self, buf="visualization.png"):
+    def visualize_hull(self, only_hull=False, buf="visualization.png"):
         """
         Visualize the convex hull of a set of 2D points.
 
         As parameter it takes a String, that will be a name of output file. If no parameter, it sets files name as 'visualization.png'
         """
+        if len(self.points) < 3:
+            raise ValueError("Not enough points to plot a convex hull")
+
         hull = self.scan()
         plt.figure()
-        x = [p.x for p in self.points]
-        y = [p.y for p in self.points]
-        plt.plot(x, y, "o", label="Points")
+        if not only_hull:
+            x = [p.x for p in self.points]
+            y = [p.y for p in self.points]
+            plt.plot(x, y, "o", label="Points")
         hull_points = hull + [hull[0]]
         hx = [p.x for p in hull_points]
         hy = [p.y for p in hull_points]
