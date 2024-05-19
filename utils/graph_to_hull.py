@@ -5,6 +5,7 @@ from utils.edmonds_karp import EdmondsKarp
 from utils.graham import Graham, Point
 import numpy as np
 from scipy.spatial import ConvexHull, distance
+from uuid import uuid4
 
 class GraphToHull:
     def __init__(self, graph, source, sink, points):
@@ -131,14 +132,14 @@ if __name__ == "__main__":
     ]
 
     points = [
-        Point(0, 3),
-        Point(1, 1),
-        Point(2, 2),
-        Point(4, 4),
-        Point(0, 0),
-        Point(1, 2),
-        Point(3, 1),
-        Point(3, 3)
+        Point(str(uuid4()), 1, 1, 0),
+        Point(str(uuid4()), 0, 3, 0),
+        Point(str(uuid4()), 2, 2, 0),
+        Point(str(uuid4()), 4, 4, 0),
+        Point(str(uuid4()), 0, 0, 0),
+        Point(str(uuid4()), 1, 2, 0),
+        Point(str(uuid4()), 3, 1, 0),
+        Point(str(uuid4()), 3, 3, 0)
     ]
 
     source = 0
