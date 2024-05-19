@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request, Form, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
-from typing import List, Dict
+from typing import List
 from uuid import uuid4
 from utils.graham import Graham, Point
 

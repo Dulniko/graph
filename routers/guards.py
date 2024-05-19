@@ -2,7 +2,7 @@ from fastapi import APIRouter, Request, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi.exceptions import HTTPException
-from utils.guards import Guard, SegmentTree, Point, Stop, patrol_route, visualize_route
+from utils.guards import Guard, SegmentTree, patrol_route, visualize_route
 from utils.graham import Graham
 from routers.points import points
 from typing import List
@@ -86,5 +86,6 @@ async def scout(
     img_base64 = base64.b64encode(buf.getvalue()).decode("ascii")
 
     return templates.TemplateResponse(
-        "scout_result.html", {"request": request, "stops": stops, "img_base64": img_base64}
+        "scout_result.html",
+        {"request": request, "stops": stops, "img_base64": img_base64},
     )

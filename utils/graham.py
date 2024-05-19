@@ -71,7 +71,7 @@ class Graham:
         """
         if len(self.points) < 3:
             raise ValueError("Not enough points to plot a convex hull")
-        
+
         hull = self.scan()
         plt.figure()
         if not only_hull:

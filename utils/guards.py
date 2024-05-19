@@ -84,21 +84,24 @@ def visualize_route(hull: List[Point], stops: List[Stop], buf):
     x_hull = [point.x for point in hull]
     y_hull = [point.y for point in hull]
 
-    stop_coords = {(stop.point.x, stop.point.y): ("red" if stop.forced else "blue") for stop in stops}
+    stop_coords = {
+        (stop.point.x, stop.point.y): ("red" if stop.forced else "blue")
+        for stop in stops
+    }
 
     plt.scatter(x_hull, y_hull, c="grey", label="Hull Points")
-    
+
     for i in range(len(hull)):
         next_i = (i + 1) % len(hull)
-        plt.plot([hull[i].x, hull[next_i].x], [hull[i].y, hull[next_i].y], 'k-')
+        plt.plot([hull[i].x, hull[next_i].x], [hull[i].y, hull[next_i].y], "k-")
 
     for point in hull:
         color = stop_coords.get((point.x, point.y), "grey")
         if color == "red":
-            plt.scatter(point.x, point.y, c=color, label=f"Stop (Forced)")
+            plt.scatter(point.x, point.y, c=color, label="Stop (Forced)")
         elif color == "blue":
-            plt.scatter(point.x, point.y, c=color, label=f"Stop (Not Forced)")
-        plt.text(point.x, point.y, f'{point.brightness}', fontsize=12, ha='right')
+            plt.scatter(point.x, point.y, c=color, label="Stop (Not Forced)")
+        plt.text(point.x, point.y, f"{point.brightness}", fontsize=12, ha="right")
 
     plt.xlabel("X coordinate")
     plt.ylabel("Y coordinate")
