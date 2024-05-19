@@ -1,10 +1,11 @@
 from typing import List
 from dataclasses import dataclass
+from uuid import uuid4
 
 
 @dataclass
 class Guard:
-    id: int
+    uuid: uuid4
     energy: int
 
 
