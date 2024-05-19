@@ -1,0 +1,8 @@
+{% for stop in stops %}
+<div class="inline-flex justify-start items-center p-2 mb-2 bg-gray-100 rounded-lg shadow-xl">
+    <span class="text-gray-700 font-medium mr-4">
+        Stop: ({{ stop.point.x }}, {{ stop.point.y }}), Brightness: {{ stop.point.brightness }}, Forced: {{ stop.forced }}
+        <br>
+    </span>
+</div>
+{% endfor %}

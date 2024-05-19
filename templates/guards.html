@@ -3,18 +3,34 @@
 {% block title %}Guards{% endblock %}
 
 {% block content %}
-<div class="flex justify-between items-start" style="width: 100%;">
+<div class="flex justify-between items-start space-x-2" style="width: 100%;">
     <!-- Left side - form and button for adding points -->
     <div class="w-1/3">
         <h1 class="text-xl font-bold mb-4">Dodaj strażnika</h1>
         <div hx-include="guards.html" hx-get="/guards-list" hx-trigger="load" class="mb-4">
-            Ładowanie listy punktów...
+            Ładowanie listy strażników...
         </div>
         <form hx-post="/guards" hx-target="#guards-container" hx-swap="outerHTML" class="mb-4">
             <input type="number" name="energy" placeholder="energy" class="border border-gray-300 p-2 rounded w-24 mr-2" required>
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Dodaj punkt
+                Dodaj strażnika
             </button>
         </form>
+    </div>
+    <!-- Right side - form for querying guards by range and displaying results -->
+    <div class="w-2/3">
+        <h1 class="text-xl font-bold mb-4">Wyszukaj strażnika według energii</h1>
+        <form hx-get="/guards-range" hx-target="#range-query-result" hx-swap="innerHTML" class="mb-4">
+            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                Wyszukaj
+            </button>
+        </form>
+        <div hx-include="guards.html" hx-get="/guards-range" hx-trigger="load" class="mb-4">
+            Ładowanie strażnika...
+        </div>
+    </div>
+    <div id="scout-result" class="w-3/3">
+        <!-- Scouting results will be displayed here -->
+    </div>
 </div>
 {% endblock %}

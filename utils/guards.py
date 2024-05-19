@@ -1,19 +1,13 @@
 from typing import List
 from dataclasses import dataclass
 from uuid import uuid4
+from utils.graham import Point
 
 
 @dataclass
 class Guard:
     uuid: uuid4
     energy: int
-
-
-@dataclass
-class Point:
-    x: int
-    y: int
-    brightness: int
 
 
 @dataclass

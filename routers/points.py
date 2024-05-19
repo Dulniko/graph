@@ -5,6 +5,7 @@ from typing import List, Dict
 from uuid import uuid4
 from utils.graham import Graham, Point
 
+import random
 import base64
 import io
 
@@ -12,7 +13,7 @@ import io
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
-points: List[Dict[str, int]] = []
+points: List[Point] = []
 
 
 @router.get("/points", response_class=HTMLResponse)
@@ -29,7 +30,7 @@ async def get_points_list(request: Request):
 
 @router.post("/points", response_class=HTMLResponse)
 async def add_point(request: Request, x: int = Form(...), y: int = Form(...)):
-    points.append({"uuid": str(uuid4()), "x": x, "y": y})
+    points.append(Point(uuid=str(uuid4()), x=x, y=y, brightness=random.randint(0, 100)))
     return templates.TemplateResponse(
         "points_list.html", {"request": request, "points": points}
     )
@@ -38,7 +39,7 @@ async def add_point(request: Request, x: int = Form(...), y: int = Form(...)):
 @router.delete("/points/{uuid}", response_class=HTMLResponse)
 async def delete_point(request: Request, uuid: str):
     for point in points:
-        if point["uuid"] == uuid:
+        if point.uuid == uuid:
             points.remove(point)
     return templates.TemplateResponse(
         "points_list.html", {"request": request, "points": points}
@@ -61,9 +62,9 @@ async def plot_points():
         )
 
     buf = io.BytesIO()
-    graham = Graham([Point(point["x"], point["y"]) for point in points])
+    graham = Graham(points)
     hull_points = graham.scan()
-    graham.visualize_hull(buf)
+    graham.visualize_hull(buf=buf)
     buf.seek(0)
 
     img_base64 = base64.b64encode(buf.getvalue()).decode("ascii")
