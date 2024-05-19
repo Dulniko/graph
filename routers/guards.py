@@ -2,11 +2,14 @@ from fastapi import APIRouter, Request, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi.exceptions import HTTPException
-from utils.guards import Guard, SegmentTree, Point, Stop, patrol_route
+from utils.guards import Guard, SegmentTree, Point, Stop, patrol_route, visualize_route
 from utils.graham import Graham
 from routers.points import points
 from typing import List
 from uuid import uuid4
+
+import io
+import base64
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
@@ -78,6 +81,10 @@ async def scout(
     hull = Graham(points).scan()
     stops = patrol_route(hull, max_steps)
 
+    buf = io.BytesIO()
+    visualize_route(hull, stops, buf)
+    img_base64 = base64.b64encode(buf.getvalue()).decode("ascii")
+
     return templates.TemplateResponse(
-        "scout_result.html", {"request": request, "stops": stops}
+        "scout_result.html", {"request": request, "stops": stops, "img_base64": img_base64}
     )

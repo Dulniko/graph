@@ -2,6 +2,7 @@ from typing import List
 from dataclasses import dataclass
 from uuid import uuid4
 from utils.graham import Point
+from matplotlib import pyplot as plt
 
 
 @dataclass
@@ -58,6 +59,7 @@ class SegmentTree:
 
 
 def patrol_route(points: List[Point], max_steps: int) -> List[Stop]:
+    # TODO: coś tu nie działa
     stops = []
     step_counter = 1
 
@@ -71,3 +73,39 @@ def patrol_route(points: List[Point], max_steps: int) -> List[Stop]:
         else:
             step_counter += 1
     return stops
+
+
+def visualize_route(hull: List[Point], stops: List[Stop], buf):
+    """
+    Visualize the route of a guard based on stops and the convex hull.
+    """
+    plt.figure()
+
+    x_hull = [point.x for point in hull]
+    y_hull = [point.y for point in hull]
+
+    stop_coords = {(stop.point.x, stop.point.y): ("red" if stop.forced else "blue") for stop in stops}
+
+    plt.scatter(x_hull, y_hull, c="grey", label="Hull Points")
+    
+    for i in range(len(hull)):
+        next_i = (i + 1) % len(hull)
+        plt.plot([hull[i].x, hull[next_i].x], [hull[i].y, hull[next_i].y], 'k-')
+
+    for point in hull:
+        color = stop_coords.get((point.x, point.y), "grey")
+        if color == "red":
+            plt.scatter(point.x, point.y, c=color, label=f"Stop (Forced)")
+        elif color == "blue":
+            plt.scatter(point.x, point.y, c=color, label=f"Stop (Not Forced)")
+        plt.text(point.x, point.y, f'{point.brightness}', fontsize=12, ha='right')
+
+    plt.xlabel("X coordinate")
+    plt.ylabel("Y coordinate")
+    plt.title("Guard Route Visualization")
+    plt.grid(True)
+    plt.legend()
+
+    plt.savefig(buf, format="png")
+    buf.seek(0)
+    plt.close()
