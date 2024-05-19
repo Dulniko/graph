@@ -62,6 +62,13 @@ class FordFulkerson:
                 self.flow[v][u] -= path_flow
                 v = parent[v]
 
+        flow_graph = [[0] * self.ROW for _ in range(self.ROW)]
+        for u in range(self.ROW):
+            for v in range(self.ROW):
+                if self.flow[u][v] > 0:
+                    flow_graph[u][v] = self.flow[u][v]
+        self.flow = flow_graph
+
         return max_flow
 
     def graph_visualize(self, graph, buf):
@@ -102,17 +109,3 @@ class FordFulkerson:
 
         plt.title("Weighted Digraph")
         plt.savefig(buf, format="png")
-
-    def flow_graph_fixed(self):
-        """
-        Returns flow graph, which shows paths and flows correctly.
-        """
-        flow_graph = self.flow
-        graph = [[0] * self.ROW for _ in range(self.ROW)]
-
-        for u in range(self.ROW):
-            for v in range(self.ROW):
-                if flow_graph[u][v] > 0:
-                    graph[u][v] = flow_graph[u][v]
-
-        return graph
