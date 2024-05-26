@@ -51,6 +51,7 @@ class Graham:
             return 2
 
     def scan(self):
+        """Compute the convex hull of a set of 2D points."""
         num_points = len(self.points)
         if num_points < 3:
             return []
