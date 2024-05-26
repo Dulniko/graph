@@ -21,46 +21,58 @@ class Graham:
         """
         self.points = points
 
-    def det(self, p, q, r):
-        """Calculate the determinant of a 3x3 matrix."""
-        return p.x * q.y + q.x * r.y + r.x * p.y - r.x * q.y - p.x * r.y - q.x * p.y
-
     def lowest_point(self):
-        """Return a point which has the lowest y. If points have the same y, return point with the lowest x"""
-        least_y = self.points[0].y
-        lowest_p = self.points[0]
-        for p in self.points:
-            if p.y < least_y:
-                lowest_p = p
-                least_y = p.y
+        """Return an index of point which has the lowest y. If points have the same y, return point with the lowest x"""
+        min_point = self.points[0]
+        for point in self.points:
+            if point.x < min_point.x:
+                min_point = point
+            elif point.x == min_point.x:
+                if point.y > min_point.y:
+                    min_point = point
+        return self.points.index(min_point)
 
-        least_x = lowest_p.x
-        for p in self.points:
-            if p.y == least_y:
-                if p.x < least_x:
-                    lowest_p = p
-                    least_x = p.x
+    def orientation(self, p, q, r):
+        """Return the position of the point r relative to the vector pq.
 
-        return lowest_p
+        0 if 'r' is on 'pq' vector
 
-    def polar_angle(self, p, start_p):
-        """Return the polar angle of point p from the origin."""
-        return math.atan2(p.y - start_p.y, p.x - start_p.x)
+        1 if 'r' is on the right side relative to 'pq' vector
 
-    def polar_sorting(self, points, start_p):
-        """Sort points by their polar angle from the origin."""
-        return sorted(points, key=lambda angle: self.polar_angle(angle, start_p))
+        2 if 'r' is on the left side relative to 'pq' vector
+        """
+        val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y)
+
+        if val == 0:
+            return 0
+        elif val > 0:
+            return 1
+        else:
+            return 2
 
     def scan(self):
-        """Compute the convex hull of a set of 2D points."""
-        start_p = self.lowest_point()
-        sorted_points = self.polar_sorting(self.points, start_p)
-        hull = [sorted_points[0], sorted_points[1]]
-        for point in sorted_points[2:]:
-            while len(hull) > 1 and self.det(hull[-2], hull[-1], point) < 0:
-                hull.pop()
-            hull.append(point)
-        return hull
+        num_points = len(self.points)
+        if num_points < 3:
+            return []
+
+        l = self.lowest_point()
+
+        hull = []
+
+        p = l
+        q = 0
+        while True:
+            hull.append(p)
+            q = (p + 1) % num_points
+
+            for i in range(num_points):
+                if self.orientation(self.points[p], self.points[i], self.points[q]) == 2:
+                    q = i
+            p = q
+            if p == l:
+                break
+
+        return [self.points[ind] for ind in hull]
 
     def visualize_hull(self, only_hull=False, buf="visualization.png"):
         """
