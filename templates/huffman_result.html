@@ -1,0 +1,14 @@
+{% if encoded_text is not none %}
+    <div class="mt-8">
+        <h2 class="text-xl font-semibold">Zakodowany tekst:</h2>
+        <p class="bg-gray-100 p-3 rounded">{{ encoded_text }}</p>
+        <h2 class="text-xl font-semibold mt-4">Odkodowany tekst:</h2>
+        <p class="bg-gray-100 p-3 rounded">{{ decoded_text }}</p>
+        <h2 class="text-xl font-semibold mt-4">Kody znaków:</h2>
+        <div class="bg-gray-100 p-3 rounded">
+            {% for char, code in codes.items() %}
+                <p>{{ char }}: {{ code }}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

@@ -1,4 +1,3 @@
-import math
 from matplotlib import pyplot as plt
 from uuid import uuid4
 
@@ -67,7 +66,10 @@ class Graham:
             q = (p + 1) % num_points
 
             for i in range(num_points):
-                if self.orientation(self.points[p], self.points[i], self.points[q]) == 2:
+                if (
+                    self.orientation(self.points[p], self.points[i], self.points[q])
+                    == 2
+                ):
                     q = i
             p = q
             if p == l:
