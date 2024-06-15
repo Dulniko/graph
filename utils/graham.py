@@ -27,7 +27,7 @@ class Graham:
             if point.x < min_point.x:
                 min_point = point
             elif point.x == min_point.x:
-                if point.y > min_point.y:
+                if point.y < min_point.y:
                     min_point = point
         return self.points.index(min_point)
 
