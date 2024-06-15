@@ -32,7 +32,7 @@ Graf w postaci listy list liczb
 Liczba opisująca maksymalny przepływ
 
 ### złożoność obliczeniowa: 
-NIE WIEM
+O(E*|f|), gdzie E to ilość krawędzi, |f| to wartość maksymalnego przepływu
 
 ##
 ## Edmonds-Karp
