@@ -70,6 +70,10 @@ async def get_guard_range(request: Request):
 async def scout(
     request: Request, guard_uuid: str = Form(...), max_steps: int = Form(...)
 ):
+    if max_steps < 1:
+        raise HTTPException(
+            status_code=400, detail="Max steps must be a positive integer"
+        )
     if len(points) < 3:
         raise HTTPException(
             status_code=404, detail="Not enough points to plot a convex hull"
