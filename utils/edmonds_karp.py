@@ -10,7 +10,7 @@ class EdmondsKarp:
 
         As parameter it takes graph (list of list of int).
         """
-        
+
         self.ROW = len(graph)
         self.flow = [[0] * self.ROW for _ in range(self.ROW)]
         self.graph = [[0] * self.ROW for _ in range(self.ROW)]
