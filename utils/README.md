@@ -81,3 +81,36 @@ Lista indeksów opisujących miejsce wystąpienie danego wzorca
 
 ### złożoność obliczeniowa: 
 O(n + m), gdzie n to długość tekstu, m to długość wzorca
+
+##
+## Drzewo przedziałowe
+
+Drzewo przedziałowe (segmentowe) służy do efektywnego wykonywania operacji na przedziałach.
+
+### dane wejściowe:
+* List[Guard] - lista obiektów klasy Guard
+* Guard - obiekt klasy Guard
+* Przedział [a, b]
+
+### dane wyjściowe:
+* maksymalna wartość w przedziale
+
+### złożoność obliczeniowa:
+* budowanie drzewa: O(n)
+* zapytanie: O(log(n))
+* aktualizacja: O(log(n))
+
+##
+## Algorytm zachłanny do ustalenia patrolu
+
+Algorytm zachłanny do ustalenia patrolu polega na wybraniu miejsc odpoczynku dla strażnika. Strażnik zatrzymuję się po maksymalnej ilosći kroków lub gdy napotyka punkt ciemniejszy od poprzedniego.
+
+### dane wejściowe:
+* List[Point] - lista obiektów klasy Point
+* max_steps - maksymalna ilość kroków
+
+### dane wyjściowe:
+* Lista punktów, w których strażnik się zatrzymał i czy zrobił to z własnej woli.
+
+### złożoność obliczeniowa:
+* O(n)
