@@ -22,7 +22,7 @@ async def encode_huffman(request: Request, text: str = Form(...)):
     decoded_text = tree.decode_text(encoded_text)
 
     return templates.TemplateResponse(
-        "huffman.html",
+        "huffman_result.html",
         {
             "request": request,
             "encoded_text": encoded_text,

@@ -1,4 +1,3 @@
-import math
 from matplotlib import pyplot as plt
 from uuid import uuid4
 
@@ -9,6 +8,16 @@ class Point:
         self.y = y
         self.brightness = brightness
         self.uuid = uuid
+
+    def __repr__(self):
+        return f"Point({self.x}, {self.y}, {self.brightness})"
+
+    def __eq__(self, other):
+        return (
+            self.x == other.x
+            and self.y == other.y
+            and self.brightness == other.brightness
+        )
 
 
 class Graham:
@@ -67,7 +76,10 @@ class Graham:
             q = (p + 1) % num_points
 
             for i in range(num_points):
-                if self.orientation(self.points[p], self.points[i], self.points[q]) == 2:
+                if (
+                    self.orientation(self.points[p], self.points[i], self.points[q])
+                    == 2
+                ):
                     q = i
             p = q
             if p == l:
