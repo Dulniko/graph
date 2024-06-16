@@ -59,19 +59,16 @@ class SegmentTree:
 
 
 def patrol_route(points: List[Point], max_steps: int) -> List[Stop]:
-    # TODO: coś tu nie działa
+    steps = 0
     stops = []
-    step_counter = 1
-
-    for i in range(1, len(points)):
-        if step_counter >= max_steps:
-            stops.append(Stop(points[i], forced=True))
-            step_counter = 1
-        elif points[i].brightness < points[i - 1].brightness:
+    for i in range(len(points)):
+        if i > 0 and points[i].brightness < points[i - 1].brightness:
             stops.append(Stop(points[i], forced=False))
-            step_counter = 1
-        else:
-            step_counter += 1
+            steps = 0
+        elif steps == max_steps:
+            stops.append(Stop(points[i], forced=True))
+            steps = 0
+        steps += 1
     return stops
 
 
@@ -84,23 +81,25 @@ def visualize_route(hull: List[Point], stops: List[Stop], buf):
     x_hull = [point.x for point in hull]
     y_hull = [point.y for point in hull]
 
-    stop_coords = {
-        (stop.point.x, stop.point.y): ("red" if stop.forced else "blue")
-        for stop in stops
-    }
-
     plt.scatter(x_hull, y_hull, c="grey", label="Hull Points")
 
     for i in range(len(hull)):
         next_i = (i + 1) % len(hull)
         plt.plot([hull[i].x, hull[next_i].x], [hull[i].y, hull[next_i].y], "k-")
 
+    forced_stops_x = [stop.point.x for stop in stops if stop.forced]
+    forced_stops_y = [stop.point.y for stop in stops if stop.forced]
+    not_forced_stops_x = [stop.point.x for stop in stops if not stop.forced]
+    not_forced_stops_y = [stop.point.y for stop in stops if not stop.forced]
+
+    if forced_stops_x:
+        plt.scatter(forced_stops_x, forced_stops_y, c="red", label="Stop (Forced)")
+    if not_forced_stops_x:
+        plt.scatter(
+            not_forced_stops_x, not_forced_stops_y, c="blue", label="Stop (Not Forced)"
+        )
+
     for point in hull:
-        color = stop_coords.get((point.x, point.y), "grey")
-        if color == "red":
-            plt.scatter(point.x, point.y, c=color, label="Stop (Forced)")
-        elif color == "blue":
-            plt.scatter(point.x, point.y, c=color, label="Stop (Not Forced)")
         plt.text(point.x, point.y, f"{point.brightness}", fontsize=12, ha="right")
 
     plt.xlabel("X coordinate")

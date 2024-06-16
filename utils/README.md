@@ -117,11 +117,6 @@ pattern = (string)pttrn
 
 ## dane wyjściowe: 
 Lista indeksów opisujących miejsce wystąpienie danego wzorca
-```python
-result = [idx1, idx2, idx3, ...]
-```
 
-## złożoność obliczeniowa: 
-### O(n + m)
-* n - długość tekstu
-* m - długość wzorca
+### złożoność obliczeniowa: 
+O(n + m), gdzie n to długość tekstu, m to długość wzorca
