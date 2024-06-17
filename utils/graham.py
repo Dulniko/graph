@@ -9,6 +9,16 @@ class Point:
         self.brightness = brightness
         self.uuid = uuid
 
+    def __repr__(self):
+        return f"Point({self.x}, {self.y}, {self.brightness})"
+
+    def __eq__(self, other):
+        return (
+            self.x == other.x
+            and self.y == other.y
+            and self.brightness == other.brightness
+        )
+
 
 class Graham:
     def __init__(self, points):
