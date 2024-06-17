@@ -10,9 +10,13 @@ class EdmondsKarp:
 
         As parameter it takes graph (list of list of int).
         """
-        self.graph = graph
+
         self.ROW = len(graph)
         self.flow = [[0] * self.ROW for _ in range(self.ROW)]
+        self.graph = [[0] * self.ROW for _ in range(self.ROW)]
+        for i in range(self.ROW):
+            for j in range(self.ROW):
+                self.graph[i][j] = graph[i][j]
 
     def bfs(self, s, t, parent):
         """
