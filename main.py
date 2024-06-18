@@ -7,6 +7,7 @@ from routers.huffman import router as huffman_router
 from routers.flows import router as flows_router
 from routers.kmp import router as kmp_router
 from routers.guards import router as guards_router
+from routers.matching import router as matching_router
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -16,6 +17,7 @@ app.include_router(huffman_router)
 app.include_router(flows_router)
 app.include_router(kmp_router)
 app.include_router(guards_router)
+app.include_router(matching_router)
 
 
 @app.get("/", response_class=HTMLResponse)
