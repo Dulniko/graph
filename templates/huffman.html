@@ -5,6 +5,16 @@
 {% block content %}
 <div class="max-w-4xl mx-auto px-4 py-8">
     <h1 class="text-2xl font-bold text-center mb-6">Kodowanie Huffmana</h1>
+    <header class="mb-6">
+        <p class="text-lg">Kiedy granice Krainy były już ustalone, Heretyk i Informatyk
+            postanowili zabezpieczyć piękną melodię. Informatyk, znając
+            ograniczenia swojej maszyny, zastosował algorytm Huffmana, aby
+            skompresować opowieść-melodię. Dzięki temu każda litera została
+            zakodowana w najkrótszy możliwy sposób. Melodia, zamieniona na
+            ciągi bitów, mogła zostać przechowana w prymitywnej maszynie.
+            Teraz Informatyk miał nadzieję, że melodia zostanie zachowana na
+            zawsze.</p>
+    </header>
     <form hx-post="/huffman" hx-target="#result" hx-swap="innerHTML" class="mb-6">
         <textarea name="text" rows="4" class="w-full p-2 border border-gray-300 rounded-md" required placeholder="Wpisz tekst tutaj..."></textarea>
         <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Koduj</button>
