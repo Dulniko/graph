@@ -14,20 +14,25 @@
             więcej niepokojących zmian. To była praca wymagająca precyzji i
             cierpliwości, ale dzięki temu Płaszczaki mogły spać spokojnie.</p>
     </header>
-    <form hx-post="/kmp_search" hx-target="#result" hx-swap="innerHTML" class="mb-6">
+
+    <form hx-post="/kmp_replace" hx-target="#replace_result" hx-swap="innerHTML">
         <label for="text" class="block text-sm font-medium text-gray-700">Tekst:</label>
         <textarea name="text" id="text" rows="4" class="w-full p-2 border border-gray-300 rounded-md" required placeholder="Wprowadź tekst tutaj..."></textarea>
-        
-        <label for="pattern" class="block text-sm font-medium text-gray-700 mt-4">Wzorzec:</label>
-        <input type="text" name="pattern" id="pattern" class="w-full p-2 border border-gray-300 rounded-md" required placeholder="Wprowadź wzorzec do wyszukania">
 
-        <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Szukaj</button>
+        <label for="pattern" class="block text-sm font-medium text-gray-700 mt-4">Wzorzec:</label>
+        <input type="text" name="pattern" id="pattern" class="w-full p-2 border border-gray-300 rounded-md" required placeholder="Wprowadź wzorzec do zamiany">
+
+        <label for="replacement" class="block text-sm font-medium text-gray-700 mt-4">Zamiennik:</label>
+        <input type="text" name="replacement" id="replacement" class="w-full p-2 border border-gray-300 rounded-md" required placeholder="Wprowadź zamiennik wzorca">
+
+        <button type="submit" class="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Zamień</button>
     </form>
 
-    <div id="result">
-        <!-- Answer will be displayed here -->
+    <div id="replace_result" class="mt-6">
+        <!-- Replacement result will be displayed here -->
     </div>
 </div>
+
 {% if request.query_params.get('source') == 'fabulary' %}
 <div class="fixed bottom-5 left-5 m-4">
     <a href="matching/?source=fabulary" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

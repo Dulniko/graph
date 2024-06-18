@@ -1,3 +1,6 @@
+import re
+
+
 class KMP:
     def __init__(self, text):
         """Initializes the KMP instance with the given text.
@@ -35,3 +38,16 @@ class KMP:
                 j = prefix[j - 1]
 
         return result
+
+    def KMP_replace(self, pattern, replacement):
+        """Replaces all occurrences of the pattern in the text with the replacement string.
+
+        Args:
+            pattern (str): The pattern to be replaced.
+            replacement (str): The string to replace the pattern with.
+
+        Returns:
+            str: The modified text with replacements.
+        """
+        modified_text = re.sub(re.escape(pattern), replacement, self.text)
+        return modified_text

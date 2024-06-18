@@ -1,0 +1,17 @@
+{% if result is not none %}
+    <div>
+        <h2 class="text-xl font-semibold">Wynik wyszukiwania:</h2>
+        {% if result %}
+            <p class="bg-green-100 p-3 rounded">Znaleziono wzorzec na indeksach: {{ result }}</p>
+        {% else %}
+            <p class="bg-red-100 p-3 rounded">Nie znaleziono wzorca</p>
+        {% endif %}
+    </div>
+{% endif %}
+<div>
+    <h2 class="text-xl font-semibold">Wynik zamiany:</h2>
+    <p><strong>Tekst oryginalny:</strong> {{ text }}</p>
+    <p><strong>Wzorzec:</strong> {{ pattern }}</p>
+    <p><strong>Zamiennik:</strong> {{ replacement }}</p>
+    <p class="bg-yellow-100 p-3 rounded"><strong>Tekst po zamianie:</strong> {{ modified_text }}</p>
+</div>
