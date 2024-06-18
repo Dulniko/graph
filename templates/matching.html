@@ -4,8 +4,19 @@
 
 {% block content %}
 <h1 class="text-2xl font-bold text-center mb-6">Maksymalne skojarzenie</h1>
+    <header class="mb-6">
+        <p class="text-lg">Problem z tragarzami nie ograniczał się tylko do transportu odcinków.
+            Nie wszyscy tragarze chcieli ze sobą współpracować. Byli tacy, którzy
+            nie znosili swojej obecności. Heretyk, znając naturę konfliktów między
+            tragarzami, zastosował algorytm maksymalnego skojarzenia. Dzięki
+            niemu udało się dobrać pary tragarzy tak, aby każdy odcinek był
+            przeniesiony sprawnie i bez konfliktów. To przypominało układanie
+            skomplikowanej układanki, gdzie każdy element musiał idealnie
+            pasować do reszty.</p>
+    </header>
 <div class="flex justify-between items-start space-x-2" style="width: 100%;">
-    <div class="w-1/2">
+    <div class="w-1/2 ">
+        
         <h1 class="text-xl font-bold mb-4">Dodaj ziomali</h1>
 
         <div hx-include="graph.html" hx-get="/graph" hx-trigger="load" class="mb-4">

@@ -5,6 +5,15 @@
 {% block content %}
 <div class="max-w-4xl mx-auto px-4 py-8">
     <h1 class="text-2xl font-bold text-center mb-6">Wyszukiwanie wzorca KMP</h1>
+    <header class="mb-6">
+        <p class="text-lg">Jednak transport odcinków płotu z fabryki do miejsca budowy okazał
+            się nie lada wyzwaniem. Płaszczaki musiały znaleźć optymalny sposób
+            transportu, aby jak najszybciej i najmniejszym kosztem dostarczyć
+            materiały. Z pomocą przyszedł algorytm maksymalnego przepływu,
+            który pomógł im wyznaczyć najwydajniejsze trasy. Dzięki niemu
+            tragarze, mimo swoich niesnasek, mogli współpracować, przenosząc
+            odcinki płotu z fabryki na plac budowy.</p>
+    </header>
     <form hx-post="/kmp_search" hx-target="#result" hx-swap="innerHTML" class="mb-6">
         <label for="text" class="block text-sm font-medium text-gray-700">Tekst:</label>
         <textarea name="text" id="text" rows="4" class="w-full p-2 border border-gray-300 rounded-md" required placeholder="Wprowadź tekst tutaj..."></textarea>
