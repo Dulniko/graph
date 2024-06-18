@@ -1,6 +1,7 @@
 import pytest
 from utils.kmp import KMP
 
+
 @pytest.mark.parametrize(
     "text, pattern, expected",
     [

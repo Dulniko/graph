@@ -1,0 +1,17 @@
+<div id="edges-container">
+    {% for edge in tmp_list %}
+    <div class="inline-flex justify-start items-center p-2 mb-2 bg-gray-100 rounded-lg shadow-xl">
+        {{ edge[0] }} - {{ edge[1] }}
+    </div>
+    {% endfor %}
+    {% if tmp_list %}
+        <button hx-get="/matching-result" hx-target="#edges-container" hx-swap="outerHTML" 
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+            Oblicz maksymalne skojarzenie
+        </button>
+    {% endif %}
+    {% if result %}
+    <div class="inline-flex justify-start items-center p-2 mb-2 bg-gray-100 rounded-lg shadow-xl">
+        Maksymalne skojarzenie: {{ result }}
+    {% endif %}
+</div>
