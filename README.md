@@ -81,3 +81,13 @@ black .
 ruff check --fix .
 ```
 
+## Użyte technologie
+- FastAPI
+- Tailwind CSS
+- Pytest
+- Black
+- Ruff
+- jinja2
+- networkx
+- matplotlib
+- htmx
