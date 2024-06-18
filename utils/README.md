@@ -21,6 +21,17 @@ result = [Point(x1, y1), Point(x2, y2), ...]
 ### O(n * log(n))
 * n - ilość punktów
 
+## niezmiennik pętli:
+Niezmiennikiem w algorytmie Grahama jest fakt, że w każdej iteracji pętli while, lista *hull* zawiera indeksy punktów tworzących część otoczki wypukłej. Innymi słowy, każdy punkt w *hull* jest częścią otoczki wypukłej dla punktów przetworzonych do tej pory.
+
+* **Otoczka wypukła**: Lista *hull* zawsze reprezentuje sekwencję punktów, które są częścią aktualnej otoczki wypukłej. Oznacza to, że po każdej iteracji while, punkty w *hull* tworzą prawidłową część otoczki wypukłej.
+
+* **Kolejność punktów**: Indeksy punktów w *hull* są dodawane i aktualizowane w taki sposób, że tworzą one spójną sekwencję, która zawsze prowadzi do budowy otoczki wypukłej. Każdy nowy punkt jest dodawany do *hull* tylko wtedy, gdy jest częścią otoczki wypukłej.
+
+* **Spójność otoczki**: Algorytm upewnia się, że po każdej iteracji pętli while, *hull* zawiera tylko te punkty, które są konieczne do utworzenia otoczki wypukłej, eliminując te, które nie spełniają kryteriów bycia na otoczce.
+
+Dzięki temu niezmiennikowi możemy być pewni, że po zakończeniu pętli while, lista *hull* będzie zawierała wszystkie punkty tworzące pełną otoczkę wypukłą dla danego zbioru punktów.
+
 #
 # Ford-Fulkerson
 Algorytm Forda-Fulkersona służy do znajdowania maksymalnego przepływu w sieci przepływowej. 
@@ -48,6 +59,9 @@ max_flow = (float)result
 ### O(E * |f|)
 * E - ilość krawędzi 
 * |f| - wartość maksymalnego przepływu
+
+## niezmiennik pętli:
+Niezmiennikiem w algorytmie Forda-Fulkersona jest fakt, że w każdej iteracji pętli while, wartość *max_flow* odpowiada maksymalnemu przepływowi znalezionemu do tej pory, a macierz *self.flow* reprezentuje aktualny przepływ w sieci, spełniając warunki równowagi przepływu i ograniczenia przepustowości.
 
 ##
 # Edmonds-Karp
@@ -77,6 +91,9 @@ max_flow = (float)result
 * V - liczba wierzchołkow 
 * E to ilość krawędzi
 
+## niezmiennik pętli:
+Niezmiennikiem w algorytmie Edmondsa-Karpa jest fakt, że w każdej iteracji pętli while, wartość *max_flow* odpowiada maksymalnemu przepływowi znalezionemu do tej pory, a macierz *self.flow* reprezentuje aktualny przepływ w sieci, który spełnia warunki równowagi przepływu i ograniczenia przepustowości.
+
 ##
 # Huffman
 Algorytm Huffmana jest stosowany do kompresji danych przez tworzenie drzewa kodowego o minimalnej sumarycznej długości kodów.
@@ -100,6 +117,14 @@ result = "0110010010..."
 ## złożoność obliczeniowa: 
 ### O(n * log(n))
 * n - liczba symboli
+
+## niezmiennik pętli:
+Niezmiennikiem w algorytmie Huffmana, w kontekście budowy drzewa Huffmana, jest fakt, że w każdej iteracji pętli while, kolejka priorytetowa zawiera węzły, które reprezentują drzewa poddrzew, a każdy węzeł jest korzeniem poddrzewa Huffmana dla przetworzonych do tej pory znaków i ich częstotliwości. 
+* **Drzewa poddrzew Huffmana**: Kolejka priorytetowa zawsze zawiera węzły, które są korzeniami drzew poddrzew Huffmana. Po każdej iteracji pętli while, drzewa te są łączone w większe drzewa, aż do momentu, gdy pozostanie jedno drzewo, które będzie pełnym drzewem Huffmana.
+
+* **Kolejność węzłów**: Kolejka priorytetowa jest utrzymywana w taki sposób, że węzły z najniższymi częstotliwościami są przetwarzane jako pierwsze. To gwarantuje, że najrzadziej występujące znaki znajdują się bliżej liści drzewa Huffmana, co prowadzi do krótszych kodów dla bardziej popularnych znaków.
+
+* **Korektywa drzewa**: Po każdej iteracji pętli while, nowe węzły tworzone przez połączenie dwóch węzłów o najniższych częstotliwościach są ponownie dodawane do kolejki priorytetowej, co zapewnia, że drzewo Huffmana jest budowane poprawnie i zgodnie z zasadą minimalnej redundancji.
 
 ##
 # Knuth-Morris-Pratt (KMP)
@@ -125,6 +150,9 @@ result = [idx1, idx2, idx3, ...]
 ### O(n + m) 
 * n - długość tekstu
 * m - długość wzorca
+
+## niezmiennik pętli:
+Niezmiennikiem w algorytmie KMP jest fakt, że w każdej iteracji odpowiedniej pętli, bieżący stan tablicy prefiksów prefix lub wskaźników *i* i *j* odzwierciedla aktualne dopasowanie prefiksu wzorca do podciągu w tekście. W budowie tablicy prefiksów *prefix[i]* reprezentuje długość najdłuższego prefiksu będącego jednocześnie sufiksem podciągu wzorca kończącego się na pozycji *i*. Podczas wyszukiwania wzorca w tekście, wskaźnik *j* śledzi bieżącą długość dopasowania wzorca, zapewniając poprawne i efektywne znajdowanie wszystkich wystąpień wzorca w tekście.
 
 ##
 # Drzewo przedziałowe
@@ -159,3 +187,6 @@ Algorytm zachłanny do ustalenia patrolu polega na wybraniu miejsc odpoczynku dl
 ## złożoność obliczeniowa:
 ### O(n)
 * n - ilość strażników
+
+## niezmiennik pętli:
+Niezmiennikiem w algorytmie **patrol_route** jest fakt, że w każdej iteracji pętli for, lista *stops* zawiera poprawnie zidentyfikowane przystanki na trasie patrolu zgodnie z warunkami jasności punktów i maksymalnej liczby kroków. Każdy przystanek jest dodawany do *stops* tylko wtedy, gdy jasność punktu spada w porównaniu do poprzedniego punktu lub liczba kroków osiągnęła wartość *max_steps*. Wskaźnik *steps* jest zawsze poprawnie resetowany po dodaniu przystanku, co zapewnia, że trasa patrolu spełnia wymagane warunki przystanków.
