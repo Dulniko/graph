@@ -5,7 +5,6 @@ from utils.kmp import KMP
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
-text = ""
 
 
 @router.get("/kmp", response_class=HTMLResponse)
