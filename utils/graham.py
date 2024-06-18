@@ -65,11 +65,11 @@ class Graham:
         if num_points < 3:
             return []
 
-        l = self.lowest_point()
+        lowest = self.lowest_point()
 
         hull = []
 
-        p = l
+        p = lowest
         q = 0
         while True:
             hull.append(p)
@@ -82,7 +82,7 @@ class Graham:
                 ):
                     q = i
             p = q
-            if p == l:
+            if p == lowest:
                 break
 
         return [self.points[ind] for ind in hull]

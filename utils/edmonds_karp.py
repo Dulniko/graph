@@ -103,7 +103,7 @@ class EdmondsKarp:
 
         nx.draw_networkx_nodes(G, pos)
 
-        edges = nx.draw_networkx_edges(
+        nx.draw_networkx_edges(
             G, pos, arrowstyle="->", arrowsize=10, edge_color="black"
         )
 

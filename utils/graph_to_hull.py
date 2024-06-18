@@ -109,7 +109,7 @@ class GraphToHull:
         nx.draw_networkx_nodes(G, pos, nodelist=[self.sink + 1], node_color="green")
         nx.draw_networkx_nodes(G, pos, nodelist=[self.source + 1], node_color="#46c741")
 
-        edges = nx.draw_networkx_edges(
+        nx.draw_networkx_edges(
             G, pos, arrowstyle="->", arrowsize=10, edge_color="black"
         )
         nx.draw_networkx_labels(

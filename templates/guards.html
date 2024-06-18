@@ -3,18 +3,18 @@
 {% block title %}Guards{% endblock %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto px-4 py-8" style="width: 100%;">
+<h1 class="text-2xl font-bold text-center mb-6">Strażnicy</h1>
+<header class="mb-6">
+    <p class="text-lg">Ochrona Krainy nie kończyła się na budowie płotu. Każdego dnia,
+        strażnik musiał obchodzić granice, aby upewnić się, że wszystko jest w
+        porządku. Heretyk, w swojej mądrości, opracował algorytm
+        obliczający energię strażników. Dzięki temu udało się ustalić, który z
+        Płaszczaków ma najwięcej energii i może podjąć się tego zadania.
+        Algorytm uwzględniał także miejsca zatrzymania strażnika, aby
+        minimalizować liczbę odsłuchań melodii i oszczędzać jego energię.</p>
+</header>
+<div class="flex justify-between items-start space-x-2" style="width: 100%;">
     <!-- Left side - form and button for adding points -->
-    <h1 class="text-2xl font-bold text-center mb-6">Strażnicy</h1>
-    <header class="mb-6">
-        <p class="text-lg">Ochrona Krainy nie kończyła się na budowie płotu. Każdego dnia,
-            strażnik musiał obchodzić granice, aby upewnić się, że wszystko jest w
-            porządku. Heretyk, w swojej mądrości, opracował algorytm
-            obliczający energię strażników. Dzięki temu udało się ustalić, który z
-            Płaszczaków ma najwięcej energii i może podjąć się tego zadania.
-            Algorytm uwzględniał także miejsca zatrzymania strażnika, aby
-            minimalizować liczbę odsłuchań melodii i oszczędzać jego energię.</p>
-    </header>
     <div class="w-1/3">
         <h1 class="text-xl font-bold mb-4">Dodaj strażnika</h1>
         <div hx-include="guards.html" hx-get="/guards-list" hx-trigger="load" class="mb-4">
@@ -42,17 +42,17 @@
     <div id="scout-result" class="w-3/3">
         <!-- Scouting results will be displayed here -->
     </div>
-    <h1 class="text-2xl font-bold text-center mb-6">Koniec</h1>
-    <header class="mb-6">
-        <p class="text-lg">Dzięki wysiłkom Płaszczaków, Kraina została otoczona bezpiecznym
-            płotem, a piękna melodia znów mogła płynąć bez zakłóceń. Heretyk i
-            Informatyk, mimo swoich różnic, współpracowali, aby zabezpieczyć
-            opowieść-melodię na przyszłość. Płaszczaki nauczyły się, jak ważna
-            jest współpraca i mądrość w rozwiązywaniu problemów. A choć
-            Heretyk wciąż badał tajemnicę trzeciego wymiaru, Płaszczaki mogły
-            cieszyć się spokojem i harmonią w swojej dwuwymiarowej Krainie.</p>
-    </header>
 </div>
+<h1 class="text-2xl font-bold text-center mb-6">Koniec</h1>
+<header class="mb-6">
+    <p class="text-lg">Dzięki wysiłkom Płaszczaków, Kraina została otoczona bezpiecznym
+        płotem, a piękna melodia znów mogła płynąć bez zakłóceń. Heretyk i
+        Informatyk, mimo swoich różnic, współpracowali, aby zabezpieczyć
+        opowieść-melodię na przyszłość. Płaszczaki nauczyły się, jak ważna
+        jest współpraca i mądrość w rozwiązywaniu problemów. A choć
+        Heretyk wciąż badał tajemnicę trzeciego wymiaru, Płaszczaki mogły
+        cieszyć się spokojem i harmonią w swojej dwuwymiarowej Krainie.</p>
+</header>
 {% if request.query_params.get('source') == 'fabulary' %}
 <div class="fixed bottom-5 left-5 m-4">
     <a href="/huffman?source=fabulary" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
