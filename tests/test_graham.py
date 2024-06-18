@@ -24,13 +24,7 @@ from utils.graham import Graham, Point
             ],
         ),
         (
-            [
-                Point(0, 0),
-                Point(1, 1),
-                Point(2, 2),
-                Point(3, 0),
-                Point(1, -1)
-            ],
+            [Point(0, 0), Point(1, 1), Point(2, 2), Point(3, 0), Point(1, -1)],
             [
                 Point(0, 0),
                 Point(1, -1),
