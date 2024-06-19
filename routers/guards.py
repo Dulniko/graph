@@ -3,7 +3,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi.exceptions import HTTPException
 from utils.guards import Guard, SegmentTree, patrol_route, visualize_route
-from utils.graham import Graham
+from utils.jarvis import Jarvis
 from routers.points import points
 from typing import List
 from uuid import uuid4
@@ -82,7 +82,7 @@ async def scout(
     if not guard:
         raise HTTPException(status_code=404, detail="Guard not found")
 
-    hull = Graham(points).scan()
+    hull = Jarvis(points).scan()
     stops = patrol_route(hull, max_steps)
 
     buf = io.BytesIO()

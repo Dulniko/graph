@@ -1,10 +1,10 @@
-# Graham
-Algorytm Grahama służy do znajdowania otoczki wypukłej zbioru punktów na płaszczyźnie. 
+# Jarvis
+Algorytm Jarvisa służy do znajdowania otoczki wypukłej zbioru punktów na płaszczyźnie. 
 
 Za pomocą tego algorytmu wyznaczamy granicę krainy płaszczaków w sposób najbardziej optymalny, dzięki czemu zostaje zaoszczędzona ilość płotów.
 
 ## dane wejściowe: 
-Lista punktów jako obiekty klasy Point (plik graham.py)
+Lista punktów jako obiekty klasy Point (plik jarvis.py)
 
 ```python
 points = [Point(x1, y1), Point(x2, y2), ...]
@@ -18,19 +18,12 @@ result = [Point(x1, y1), Point(x2, y2), ...]
 ```
 
 ## złożoność obliczeniowa: 
-### O(n * log(n))
+### O(n * h)
 * n - ilość punktów
+* h - ilość punktów otoczki wypukłej
 
 ## niezmiennik pętli:
-Niezmiennikiem w algorytmie Grahama jest fakt, że w każdej iteracji pętli while, lista *hull* zawiera indeksy punktów tworzących część otoczki wypukłej. Innymi słowy, każdy punkt w *hull* jest częścią otoczki wypukłej dla punktów przetworzonych do tej pory.
-
-* **Otoczka wypukła**: Lista *hull* zawsze reprezentuje sekwencję punktów, które są częścią aktualnej otoczki wypukłej. Oznacza to, że po każdej iteracji while, punkty w *hull* tworzą prawidłową część otoczki wypukłej.
-
-* **Kolejność punktów**: Indeksy punktów w *hull* są dodawane i aktualizowane w taki sposób, że tworzą one spójną sekwencję, która zawsze prowadzi do budowy otoczki wypukłej. Każdy nowy punkt jest dodawany do *hull* tylko wtedy, gdy jest częścią otoczki wypukłej.
-
-* **Spójność otoczki**: Algorytm upewnia się, że po każdej iteracji pętli while, *hull* zawiera tylko te punkty, które są konieczne do utworzenia otoczki wypukłej, eliminując te, które nie spełniają kryteriów bycia na otoczce.
-
-Dzięki temu niezmiennikowi możemy być pewni, że po zakończeniu pętli while, lista *hull* będzie zawierała wszystkie punkty tworzące pełną otoczkę wypukłą dla danego zbioru punktów.
+Niezmiennikiem w algorytmie Jarvisa jest fakt, że w każdym kroku pętli lista *hull* zawiera indeksy punktów, które są częścią otoczki wypukłej przetwarzanych do tej pory punktów, zaczynając od punktu o najniższej wartości *y* (i najniższej wartości *x* w przypadku remisu). Punkt *p* zawsze wskazuje na bieżący punkt otoczki wypukłej, a zmienna *q* wskazuje na potencjalny kolejny punkt, który jest najbardziej zewnętrzny względem wszystkich przetworzonych punktów.
 
 #
 # Ford-Fulkerson

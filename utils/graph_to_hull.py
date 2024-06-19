@@ -1,7 +1,7 @@
 from matplotlib import pyplot as plt
 import networkx as nx
 from utils.edmonds_karp import EdmondsKarp
-from utils.graham import Graham, Point
+from utils.jarvis import Jarvis, Point
 import numpy as np
 from scipy.spatial import ConvexHull
 from uuid import uuid4
@@ -10,8 +10,8 @@ from uuid import uuid4
 class GraphToHull:
     def __init__(self, graph, source, sink, points):
         self.points = points
-        self.graham = Graham(points)
-        self.hull = self.graham.scan()
+        self.jarvis = Jarvis(points)
+        self.hull = self.jarvis.scan()
 
         self.ek = EdmondsKarp(graph)
         self.source = source

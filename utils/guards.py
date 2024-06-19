@@ -1,7 +1,7 @@
 from typing import List
 from dataclasses import dataclass
 from uuid import uuid4
-from utils.graham import Point
+from utils.jarvis import Point
 from matplotlib import pyplot as plt
 
 

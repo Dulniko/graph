@@ -3,7 +3,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from typing import List
 from uuid import uuid4
-from utils.graham import Graham, Point
+from utils.jarvis import Jarvis, Point
 
 import random
 import base64
@@ -62,9 +62,9 @@ async def plot_points():
         )
 
     buf = io.BytesIO()
-    graham = Graham(points)
-    hull_points = graham.scan()
-    graham.visualize_hull(buf=buf)
+    jarvis = Jarvis(points)
+    hull_points = jarvis.scan()
+    jarvis.visualize_hull(buf=buf)
     buf.seek(0)
 
     img_base64 = base64.b64encode(buf.getvalue()).decode("ascii")
